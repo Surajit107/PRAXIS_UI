@@ -16,9 +16,9 @@ export const dynamic = "force-static";
 export const revalidate = false;
 
 export function generateStaticParams() {
-  return getAllDocsDocuments().map((doc) =>
-    doc.slug.length === 0 ? {} : { slug: doc.slug },
-  );
+  // Optional catch-all requires `{ slug: [] }` for `/docs` — bare `{}` yields
+  // zero prerendered paths (blocking + empty), which 404s on Cloudflare Workers.
+  return getAllDocsDocuments().map((doc) => ({ slug: doc.slug }));
 }
 
 export async function generateMetadata({

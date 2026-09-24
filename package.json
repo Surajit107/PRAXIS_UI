@@ -3,15 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "docs:manifest": "node ./scripts/generate-docs-manifest.mjs",
+    "predev": "npm run docs:manifest",
     "dev": "cross-env NODE_OPTIONS=--require=./scripts/patch-fs-readlink.cjs next dev --webpack",
+    "prebuild": "npm run docs:manifest",
     "build": "cross-env NODE_OPTIONS=--require=./scripts/patch-fs-readlink.cjs next build --webpack",
     "start": "next start",
     "lint": "eslint",
-    "preview": "cross-env NODE_OPTIONS=--require=./scripts/patch-fs-readlink.cjs opennextjs-cloudflare build && opennextjs-cloudflare preview",
-    "deploy": "cross-env NODE_OPTIONS=--require=./scripts/patch-fs-readlink.cjs opennextjs-cloudflare build && opennextjs-cloudflare deploy",
-    "upload": "cross-env NODE_OPTIONS=--require=./scripts/patch-fs-readlink.cjs opennextjs-cloudflare build && opennextjs-cloudflare upload",
+    "preview": "npm run docs:manifest && cross-env NODE_OPTIONS=--require=./scripts/patch-fs-readlink.cjs opennextjs-cloudflare build && opennextjs-cloudflare populateCache local && opennextjs-cloudflare preview",
+    "deploy": "npm run docs:manifest && cross-env NODE_OPTIONS=--require=./scripts/patch-fs-readlink.cjs opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+    "upload": "npm run docs:manifest && cross-env NODE_OPTIONS=--require=./scripts/patch-fs-readlink.cjs opennextjs-cloudflare build && opennextjs-cloudflare upload",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
-    "cf-build": "cross-env NODE_OPTIONS=--require=./scripts/patch-fs-readlink.cjs opennextjs-cloudflare build"
+    "cf-build": "npm run docs:manifest && cross-env NODE_OPTIONS=--require=./scripts/patch-fs-readlink.cjs opennextjs-cloudflare build && opennextjs-cloudflare populateCache local"
   },
   "dependencies": {
     "@mdx-js/mdx": "^3.1.1",
