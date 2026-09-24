@@ -63,6 +63,7 @@ export const mdxComponents: MDXComponents = {
   a: ({ href = "", children }) => (
     <SmartLink
       href={href}
+      prefetch={false}
       className="font-medium text-accent underline-offset-4 hover:underline"
     >
       {children}

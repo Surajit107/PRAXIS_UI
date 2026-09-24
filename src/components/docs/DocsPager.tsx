@@ -19,6 +19,7 @@ export function DocsPager({ pathname }: DocsPagerProps) {
       {prev ? (
         <SmartLink
           href={prev.href}
+          prefetch={false}
           className="group flex flex-col gap-1 rounded-[var(--radius-md)] border border-border bg-surface px-4 py-3 transition-colors hover:border-border-strong hover:bg-surface-2"
         >
           <span className="inline-flex items-center gap-1.5 text-xs text-subtle">
@@ -35,6 +36,7 @@ export function DocsPager({ pathname }: DocsPagerProps) {
       {next ? (
         <SmartLink
           href={next.href}
+          prefetch={false}
           className="group flex flex-col items-end gap-1 rounded-[var(--radius-md)] border border-border bg-surface px-4 py-3 text-right transition-colors hover:border-border-strong hover:bg-surface-2"
         >
           <span className="inline-flex items-center gap-1.5 text-xs text-subtle">

@@ -22,6 +22,7 @@ export function DocsBreadcrumbs({ pathname }: DocsBreadcrumbsProps) {
               {crumb.href && !last ? (
                 <SmartLink
                   href={crumb.href}
+                  prefetch={false}
                   className="transition-colors hover:text-foreground"
                 >
                   {crumb.label}
