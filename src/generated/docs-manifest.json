@@ -1,0 +1,338 @@
+[
+  {
+    "slug": [],
+    "href": "/docs",
+    "frontmatter": {
+      "title": "Introduction",
+      "description": "PraxisAPP is a free practice API platform — real backends, no keys, no site login."
+    },
+    "body": "\n# Introduction\n\nPraxisAPP gives you production-shaped HTTP surfaces so you can learn, prototype, and validate client integrations without scaffolding a backend from scratch.\n\nYou get auth, ecommerce, social, chat, todos, public datasets, and HTTP utilities — all documented here and callable from the [playground](/playground).\n\n## What you get\n\n- **No API keys** for public practice routes — hit them and inspect responses immediately\n- **Auth-backed modules** when you need JWT/session behaviour (register, login, refresh)\n- **Consistent response envelopes** across domains so clients can share parsers\n- **OpenAPI as source of truth** — the interactive [API Reference](/docs/api) is generated from the same spec\n\n## Base URL\n\nLocal development defaults to:\n\n```bash\nhttp://localhost:8000\n```\n\nSet `NEXT_PUBLIC_PRAXIS_API_URL` in the UI project if your API listens elsewhere. All guide examples use that host.\n\n## How to use these docs\n\n1. Start with [Quickstart](/docs/quickstart) for a health check and first `GET`\n2. Read [Authentication](/docs/authentication) before calling protected app routes\n3. Follow the [guides](/docs/guides/first-request) for request patterns and domain maps\n4. Open the [API Reference](/docs/api) when you need exact schemas, status codes, and Try It\n\n## Spec & version\n\n- OpenAPI: [`/openapi.yaml`](/openapi.yaml)\n- API version: **1.3.1** (see [Changelog](/docs/changelog))\n",
+    "headings": [
+      {
+        "id": "what-you-get",
+        "text": "What you get",
+        "level": 2
+      },
+      {
+        "id": "base-url",
+        "text": "Base URL",
+        "level": 2
+      },
+      {
+        "id": "how-to-use-these-docs",
+        "text": "How to use these docs",
+        "level": 2
+      },
+      {
+        "id": "spec-version",
+        "text": "Spec & version",
+        "level": 2
+      }
+    ]
+  },
+  {
+    "slug": [
+      "authentication"
+    ],
+    "href": "/docs/authentication",
+    "frontmatter": {
+      "title": "Authentication",
+      "description": "Register, login, and attach JWTs for Praxis app domains (ecommerce, social, chat, todos)."
+    },
+    "body": "\n# Authentication\n\nPublic datasets are open. App domains (users, ecommerce, social, chat, todos) expect authenticated sessions.\n\n## Register\n\n```bash\ncurl -s -X POST http://localhost:8000/api/v1/users/register \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"username\":\"demo\",\"email\":\"demo@example.com\",\"password\":\"Password1!\"}'\n```\n\n## Login\n\n```bash\ncurl -s -X POST http://localhost:8000/api/v1/users/login \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"username\":\"demo\",\"password\":\"Password1!\"}'\n```\n\nStore the access token from the response (field names follow the OpenAPI schemas in the [API Reference](/docs/api)).\n\n## Calling protected routes\n\nSend the bearer token on subsequent requests:\n\n```bash\ncurl -s http://localhost:8000/api/v1/ecommerce/products \\\n  -H \"Authorization: Bearer YOUR_ACCESS_TOKEN\"\n```\n\n## Refresh\n\nUse the refresh endpoint when access tokens expire — see **Authentication** in the [API Reference](/docs/api) for the exact payload and status codes.\n\n## Practice tips\n\n- Prefer disposable local credentials; seed/reset helpers exist for development only\n- Never commit real tokens; guides use placeholders like `YOUR_ACCESS_TOKEN`\n- Validate auth flows in the [playground](/playground?domain=apps) before wiring a client\n",
+    "headings": [
+      {
+        "id": "register",
+        "text": "Register",
+        "level": 2
+      },
+      {
+        "id": "login",
+        "text": "Login",
+        "level": 2
+      },
+      {
+        "id": "calling-protected-routes",
+        "text": "Calling protected routes",
+        "level": 2
+      },
+      {
+        "id": "refresh",
+        "text": "Refresh",
+        "level": 2
+      },
+      {
+        "id": "practice-tips",
+        "text": "Practice tips",
+        "level": 2
+      }
+    ]
+  },
+  {
+    "slug": [
+      "changelog"
+    ],
+    "href": "/docs/changelog",
+    "frontmatter": {
+      "title": "Changelog",
+      "description": "Praxis API documentation and OpenAPI version history."
+    },
+    "body": "\n# Changelog\n\n## 1.3.1\n\n- Current OpenAPI document served at [`/openapi.yaml`](/openapi.yaml)\n- Domains: System, Public APIs, Geo APIs, Kitchen Sink, Authentication, Ecommerce, Todo list, Social Media, Chat App, Database Seeding, Danger Zone\n- Marketing docs site: MDX guides + Scalar API Reference under `/docs`\n\n## Notes\n\n- Spec title: **Praxis API**\n- Contact: Praxis API Maintainers\n\nFuture releases will append entries here. Prefer the OpenAPI `info.version` field as the machine-readable version signal.\n",
+    "headings": [
+      {
+        "id": "131",
+        "text": "1.3.1",
+        "level": 2
+      },
+      {
+        "id": "notes",
+        "text": "Notes",
+        "level": 2
+      }
+    ]
+  },
+  {
+    "slug": [
+      "errors"
+    ],
+    "href": "/docs/errors",
+    "frontmatter": {
+      "title": "Errors",
+      "description": "How Praxis signals failures — HTTP status codes and the shared JSON envelope."
+    },
+    "body": "\n# Errors\n\n## Read both layers\n\n1. **HTTP status** — transport-level signal (`4xx` client, `5xx` server)\n2. **Envelope** — when present, check `success`, `statusCode`, and `message`\n\n```json\n{\n  \"data\": null,\n  \"message\": \"Unauthorized request\",\n  \"statusCode\": 401,\n  \"success\": false\n}\n```\n\nExact payloads vary by route — always confirm examples in the [API Reference](/docs/api).\n\n## Common statuses\n\n| Status | Meaning in practice |\n|--------|---------------------|\n| `400` | Validation or malformed body/query |\n| `401` | Missing or invalid credentials |\n| `403` | Authenticated but not allowed |\n| `404` | Unknown resource or path |\n| `409` | Conflict (duplicate registration, state clash) |\n| `429` | Throttled — see [Rate limits](/docs/rate-limits) |\n| `5xx` | Server or dependency failure |\n\n## Kitchen-sink status drills\n\nForce specific codes when testing client error handling:\n\n`GET /api/v1/kitchen-sink/status-codes/{code}`\n\n## Debugging checklist\n\n- Confirm base URL and path prefix (`/api/v1`)\n- Confirm `Content-Type` on bodies\n- Confirm `Authorization` on protected routes\n- Compare your payload to the OpenAPI example for that `operationId`\n",
+    "headings": [
+      {
+        "id": "read-both-layers",
+        "text": "Read both layers",
+        "level": 2
+      },
+      {
+        "id": "common-statuses",
+        "text": "Common statuses",
+        "level": 2
+      },
+      {
+        "id": "kitchen-sink-status-drills",
+        "text": "Kitchen-sink status drills",
+        "level": 2
+      },
+      {
+        "id": "debugging-checklist",
+        "text": "Debugging checklist",
+        "level": 2
+      }
+    ]
+  },
+  {
+    "slug": [
+      "guides",
+      "api-usage"
+    ],
+    "href": "/docs/guides/api-usage",
+    "frontmatter": {
+      "title": "API usage",
+      "description": "Headers, response envelopes, pagination, and conventions shared across Praxis domains."
+    },
+    "body": "\n# API usage\n\n## Base path\n\nMost product routes live under `/api/v1/...`. System probes (`/health`, `/live`, `/ready`, `/version`) sit at the server root — see the [API Reference](/docs/api).\n\n## Headers\n\n| Header | When |\n|--------|------|\n| `Accept: application/json` | Prefer JSON responses |\n| `Content-Type: application/json` | JSON request bodies |\n| `Authorization: Bearer <token>` | Protected app routes |\n\n## Response envelope\n\nSuccessful and many error responses follow a shared shape:\n\n```json\n{\n  \"data\": {},\n  \"message\": \"…\",\n  \"statusCode\": 200,\n  \"success\": true\n}\n```\n\nTreat `success` and `statusCode` as first-class signals; do not assume every `4xx` body is unstructured.\n\n## Pagination\n\nList endpoints commonly accept `page` and `limit` query parameters. Values are often typed as strings in OpenAPI — pass `\"1\"`, `\"10\"` (or numeric strings via your client). Always confirm the operation schema in the reference.\n\n## Idempotency & verbs\n\n- Prefer `GET` for reads and public fixtures\n- Use `POST` for creates and auth actions\n- Use `PATCH` / `PUT` for updates where documented\n- Use `DELETE` for removals — kitchen-sink and danger-zone routes can be destructive; keep them local\n\n## CORS\n\nThe practice API is intended for local and demo clients. If the browser blocks a cross-origin call, confirm the API CORS config and that you are targeting the URL in `NEXT_PUBLIC_PRAXIS_API_URL`.\n",
+    "headings": [
+      {
+        "id": "base-path",
+        "text": "Base path",
+        "level": 2
+      },
+      {
+        "id": "headers",
+        "text": "Headers",
+        "level": 2
+      },
+      {
+        "id": "response-envelope",
+        "text": "Response envelope",
+        "level": 2
+      },
+      {
+        "id": "pagination",
+        "text": "Pagination",
+        "level": 2
+      },
+      {
+        "id": "idempotency-verbs",
+        "text": "Idempotency & verbs",
+        "level": 2
+      },
+      {
+        "id": "cors",
+        "text": "CORS",
+        "level": 2
+      }
+    ]
+  },
+  {
+    "slug": [
+      "guides",
+      "domains"
+    ],
+    "href": "/docs/guides/domains",
+    "frontmatter": {
+      "title": "Working with domains",
+      "description": "Map Praxis public, apps, and kitchen-sink surfaces to the playground and OpenAPI tags."
+    },
+    "body": "\n# Working with domains\n\nPraxis groups routes into practice surfaces. Use this map to pick a starting point, then deep-dive in the [API Reference](/docs/api).\n\n## Public\n\nReady-to-hit datasets — users, products, geo, quotes, and business-shaped collections (companies, invoices, orders, …).\n\n- Playground: [/playground?domain=public](/playground?domain=public)\n- OpenAPI tags: Public APIs, Geo APIs\n\n## Apps\n\nAuthenticated product modules:\n\n| Domain | Typical base | Playground |\n|--------|--------------|------------|\n| Authentication / users | `/api/v1/users` | [apps](/playground?domain=apps) |\n| Ecommerce | `/api/v1/ecommerce` | [apps](/playground?domain=apps) |\n| Social media | `/api/v1/social-media` | [apps](/playground?domain=apps) |\n| Chat | `/api/v1/chat-app` | [apps](/playground?domain=apps) |\n| Todos | `/api/v1/todos` | [apps](/playground?domain=apps) |\n\nRead [Authentication](/docs/authentication) before calling protected ecommerce/social/chat routes.\n\n## Kitchen sink\n\nHTTP utilities for status codes, cookies, redirects, and request inspection — useful for edge-case clients, not product stories.\n\n- Playground: [/playground?domain=kitchen-sink](/playground?domain=kitchen-sink)\n- OpenAPI tag: Kitchen Sink\n\n## Operations & danger zone\n\nSystem health/version tags are for ops checks. **Danger Zone** and seeding helpers are development-only and can wipe or reshape local data — never point them at a shared environment you care about.\n\n## Next\n\nBrowse every operation in the [API Reference](/docs/api), filtered by tag in Scalar’s sidebar.\n",
+    "headings": [
+      {
+        "id": "public",
+        "text": "Public",
+        "level": 2
+      },
+      {
+        "id": "apps",
+        "text": "Apps",
+        "level": 2
+      },
+      {
+        "id": "kitchen-sink",
+        "text": "Kitchen sink",
+        "level": 2
+      },
+      {
+        "id": "operations-danger-zone",
+        "text": "Operations & danger zone",
+        "level": 2
+      },
+      {
+        "id": "next",
+        "text": "Next",
+        "level": 2
+      }
+    ]
+  },
+  {
+    "slug": [
+      "guides",
+      "first-request"
+    ],
+    "href": "/docs/guides/first-request",
+    "frontmatter": {
+      "title": "Making your first request",
+      "description": "Hit a public Praxis endpoint with cURL, JavaScript, TypeScript, and Python."
+    },
+    "body": "\n# Making your first request\n\nThis guide fetches a short list of random users from the public API. No authentication required.\n\n## Endpoint\n\n`GET /api/v1/public/randomusers`\n\nQuery parameters: `page`, `limit` (strings in the OpenAPI schema — pass numeric strings).\n\n## Examples\n\n<CodeTabs\n  examples={[\n    {\n      label: \"cURL\",\n      language: \"bash\",\n      code: `curl -s \"http://localhost:8000/api/v1/public/randomusers?page=1&limit=3\" \\\\\n  -H \"Accept: application/json\"`,\n    },\n    {\n      label: \"JavaScript\",\n      language: \"javascript\",\n      code: `const res = await fetch(\n  \"http://localhost:8000/api/v1/public/randomusers?page=1&limit=3\",\n  { headers: { Accept: \"application/json\" } },\n);\nconst body = await res.json();\nconsole.log(body);`,\n    },\n    {\n      label: \"TypeScript\",\n      language: \"typescript\",\n      code: `type PraxisEnvelope<T> = {\n  data: T;\n  message: string;\n  statusCode: number;\n  success: boolean;\n};\n\nconst res = await fetch(\n  \"http://localhost:8000/api/v1/public/randomusers?page=1&limit=3\",\n);\nconst body = (await res.json()) as PraxisEnvelope<unknown>;\nif (!body.success) throw new Error(body.message);\nconsole.log(body.data);`,\n    },\n    {\n      label: \"Python\",\n      language: \"python\",\n      code: `import urllib.request\nimport json\n\nurl = \"http://localhost:8000/api/v1/public/randomusers?page=1&limit=3\"\nwith urllib.request.urlopen(url) as res:\n    body = json.load(res)\nprint(body)`,\n    },\n  ]}\n/>\n\n## What to inspect\n\n- HTTP status (expect `200` on success)\n- Envelope fields: `success`, `statusCode`, `message`, `data`\n- Pagination behaviour when you change `page` / `limit`\n\n## Next\n\n- [API usage](/docs/guides/api-usage) — headers, envelopes, pagination conventions\n- [API Reference](/docs/api) — full schema for this operation\n",
+    "headings": [
+      {
+        "id": "endpoint",
+        "text": "Endpoint",
+        "level": 2
+      },
+      {
+        "id": "examples",
+        "text": "Examples",
+        "level": 2
+      },
+      {
+        "id": "what-to-inspect",
+        "text": "What to inspect",
+        "level": 2
+      },
+      {
+        "id": "next",
+        "text": "Next",
+        "level": 2
+      }
+    ]
+  },
+  {
+    "slug": [
+      "quickstart"
+    ],
+    "href": "/docs/quickstart",
+    "frontmatter": {
+      "title": "Quickstart",
+      "description": "Confirm the API is up, then make your first public GET in under a minute."
+    },
+    "body": "\n# Quickstart\n\n## 1. Run the API\n\nStart `PRAXIS_API` locally (default `http://localhost:8000`). Confirm the UI can reach it via `NEXT_PUBLIC_PRAXIS_API_URL`.\n\n## 2. Health check\n\n```bash\ncurl -s http://localhost:8000/health\n```\n\nExpect a JSON envelope with `success: true` and operational status fields.\n\n## 3. First public request\n\nPublic collections do not require authentication:\n\n```bash\ncurl -s \"http://localhost:8000/api/v1/public/randomusers?page=1&limit=5\"\n```\n\n## 4. Try it in the browser\n\n- [Playground](/playground?domain=public) — fire live requests with domain presets\n- [API Reference](/docs/api) — OpenAPI-backed Try It console\n\n## Next steps\n\n- [Making your first request](/docs/guides/first-request) — JS, TypeScript, cURL, and Python\n- [Authentication](/docs/authentication) — register and login for app domains\n- [Working with domains](/docs/guides/domains) — public vs apps vs kitchen-sink\n",
+    "headings": [
+      {
+        "id": "1-run-the-api",
+        "text": "1. Run the API",
+        "level": 2
+      },
+      {
+        "id": "2-health-check",
+        "text": "2. Health check",
+        "level": 2
+      },
+      {
+        "id": "3-first-public-request",
+        "text": "3. First public request",
+        "level": 2
+      },
+      {
+        "id": "4-try-it-in-the-browser",
+        "text": "4. Try it in the browser",
+        "level": 2
+      },
+      {
+        "id": "next-steps",
+        "text": "Next steps",
+        "level": 2
+      }
+    ]
+  },
+  {
+    "slug": [
+      "rate-limits"
+    ],
+    "href": "/docs/rate-limits",
+    "frontmatter": {
+      "title": "Rate limits",
+      "description": "Fair-use expectations for the Praxis practice API — no invented quotas."
+    },
+    "body": "\n# Rate limits\n\nPraxis is a **practice and prototyping** API. There is no marketed public SLA and no guaranteed global quota advertised in the OpenAPI spec.\n\n## What that means\n\n- Do **not** assume unlimited throughput in shared or hosted deployments\n- Treat aggressive parallel scraping as abuse even when no `429` is returned locally\n- Prefer reasonable client pacing (tens of requests per second is already more than a tutorial needs)\n\n## If you receive `429`\n\nBack off exponentially, reduce concurrency, and cache public fixtures locally when you are iterating on UI.\n\n## Production systems\n\nWhen you leave the sandbox, design rate limiting, auth, and quotas deliberately. Praxis teaches client shape — it is not a substitute for your production edge.\n\nSee also [Errors](/docs/errors) for status handling patterns.\n",
+    "headings": [
+      {
+        "id": "what-that-means",
+        "text": "What that means",
+        "level": 2
+      },
+      {
+        "id": "if-you-receive-429",
+        "text": "If you receive 429",
+        "level": 2
+      },
+      {
+        "id": "production-systems",
+        "text": "Production systems",
+        "level": 2
+      }
+    ]
+  },
+  {
+    "slug": [
+      "sdks"
+    ],
+    "href": "/docs/sdks",
+    "frontmatter": {
+      "title": "SDKs",
+      "description": "Praxis has no official SDKs yet — use standard HTTP clients and the playground."
+    },
+    "body": "\n# SDKs\n\nThere are **no official Praxis language SDKs** today. That is intentional for a practice API: you should wire real HTTP clients the same way you will against production services.\n\n## Recommended approach\n\n| Language | Typical stack |\n|----------|----------------|\n| JavaScript / TypeScript | `fetch`, Axios, ky |\n| Python | `httpx`, `requests`, `urllib` |\n| Shell | cURL, HTTPie |\n\n## OpenAPI-generated clients\n\nGenerate typed clients from [`/openapi.yaml`](/openapi.yaml) with open-source generators (openapi-generator, openapi-typescript, etc.) if you want stronger typing. Keep the YAML as the source of truth — do not fork a second API definition.\n\n## Interactive practice\n\n- [Playground](/playground) — fire live requests without leaving the site\n- [API Reference](/docs/api) — Scalar Try It with the same OpenAPI document\n\nWhen first-party SDKs ship, they will be listed here and versioned in the [Changelog](/docs/changelog).\n",
+    "headings": [
+      {
+        "id": "recommended-approach",
+        "text": "Recommended approach",
+        "level": 2
+      },
+      {
+        "id": "openapi-generated-clients",
+        "text": "OpenAPI-generated clients",
+        "level": 2
+      },
+      {
+        "id": "interactive-practice",
+        "text": "Interactive practice",
+        "level": 2
+      }
+    ]
+  }
+]
