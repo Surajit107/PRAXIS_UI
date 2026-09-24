@@ -26,6 +26,13 @@ const links = [
   { href: "/docs", label: "Documentation", icon: BookOpen, newTab: true },
 ] as const;
 
+const SECTION_IDS = links
+  .map((link) => {
+    const hash = link.href.includes("#") ? link.href.split("#")[1] : undefined;
+    return hash || null;
+  })
+  .filter((id): id is string => Boolean(id));
+
 const iconMotion: Variants = {
   rest: { scale: 1, y: 0, rotate: 0 },
   hover: { scale: 1.14, y: -1.5, rotate: -8 },
@@ -34,8 +41,91 @@ const iconMotion: Variants = {
 
 const SPRING = { type: "spring" as const, stiffness: 480, damping: 28, mass: 0.55 };
 
-function isActive(pathname: string, href: string) {
-  return !href.includes("#") && pathname.startsWith(href);
+/** Path routes + home-section hashes (scroll-spy / URL hash). */
+function isActive(pathname: string, href: string, activeSection: string | null) {
+  if (href.includes("#")) {
+    if (pathname !== "/") return false;
+    const section = href.slice(href.indexOf("#") + 1);
+    return Boolean(section) && section === activeSection;
+  }
+
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
+
+/** Which landing section is in view (or matches location.hash). */
+function useActiveSection(pathname: string) {
+  const [activeSection, setActiveSection] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (pathname !== "/") {
+      setActiveSection(null);
+      return;
+    }
+
+    const readHash = () => {
+      const raw = window.location.hash.replace(/^#/, "");
+      return SECTION_IDS.includes(raw) ? raw : null;
+    };
+
+    setActiveSection(readHash());
+
+    const onHashChange = () => setActiveSection(readHash());
+    window.addEventListener("hashchange", onHashChange);
+
+    const elements = SECTION_IDS.map((id) => document.getElementById(id)).filter(
+      (el): el is HTMLElement => Boolean(el),
+    );
+
+    if (elements.length === 0) {
+      return () => window.removeEventListener("hashchange", onHashChange);
+    }
+
+    // Bias toward the section under the floating nav.
+    const visible = new Map<string, number>();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          const id = entry.target.id;
+          if (entry.isIntersecting) {
+            visible.set(id, entry.intersectionRatio);
+          } else {
+            visible.delete(id);
+          }
+        }
+
+        if (visible.size === 0) {
+          // Above first section (hero) — clear highlight unless URL hash pins one.
+          setActiveSection(readHash());
+          return;
+        }
+
+        let bestId: string | null = null;
+        let bestRatio = -1;
+        for (const id of SECTION_IDS) {
+          const ratio = visible.get(id);
+          if (ratio !== undefined && ratio > bestRatio) {
+            bestRatio = ratio;
+            bestId = id;
+          }
+        }
+        if (bestId) setActiveSection(bestId);
+      },
+      {
+        root: null,
+        rootMargin: "-20% 0px -55% 0px",
+        threshold: [0, 0.25, 0.5, 0.75, 1],
+      },
+    );
+
+    for (const el of elements) observer.observe(el);
+
+    return () => {
+      window.removeEventListener("hashchange", onHashChange);
+      observer.disconnect();
+    };
+  }, [pathname]);
+
+  return activeSection;
 }
 
 function NavIcon({
@@ -60,7 +150,8 @@ function NavIcon({
 }
 
 export function SiteNav() {
-  const pathname = usePathname();
+  const pathname = usePathname() || "";
+  const activeSection = useActiveSection(pathname);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -98,7 +189,7 @@ export function SiteNav() {
               className="ml-1 hidden min-w-0 flex-1 items-center justify-center gap-0.5 lg:flex"
             >
               {links.map((link) => {
-                const active = isActive(pathname, link.href);
+                const active = isActive(pathname, link.href, activeSection);
                 return (
                   <m.div
                     key={link.href}
@@ -164,7 +255,7 @@ export function SiteNav() {
               >
                 <ul className="flex flex-col gap-0.5 px-2.5 py-2.5">
                   {links.map((link, index) => {
-                    const active = isActive(pathname, link.href);
+                    const active = isActive(pathname, link.href, activeSection);
                     return (
                       <m.li
                         key={link.href}
