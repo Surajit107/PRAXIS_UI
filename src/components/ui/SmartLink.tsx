@@ -12,6 +12,11 @@ type SmartLinkProps = {
   onClick?: MouseEventHandler<HTMLAnchorElement>;
   /** Open in a new browsing context (docs shell, external tools, etc.). */
   newTab?: boolean;
+  /**
+   * Next.js Link prefetch. Prefer false on dense docs nav until OpenNext
+   * serves segment prefetches correctly on Next 16.3.
+   */
+  prefetch?: boolean;
   "aria-current"?: "page" | "step" | "location" | "date" | "time" | "true" | "false";
 };
 
@@ -22,6 +27,7 @@ export function SmartLink({
   children,
   onClick,
   newTab = false,
+  prefetch,
   "aria-current": ariaCurrent,
 }: SmartLinkProps) {
   const tabProps = newTab ? ({ target: "_blank", rel: "noreferrer" } as const) : {};
@@ -58,6 +64,7 @@ export function SmartLink({
       href={href}
       className={className}
       onClick={onClick}
+      prefetch={prefetch}
       aria-current={ariaCurrent}
     >
       {children}

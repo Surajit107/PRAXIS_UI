@@ -25,6 +25,7 @@ export function DocsSidebar({ pathname, onNavigate }: DocsSidebarProps) {
                 <li key={item.href}>
                   <SmartLink
                     href={item.href}
+                    prefetch={false}
                     onClick={onNavigate}
                     aria-current={active ? "page" : undefined}
                     className={`block rounded-md px-2.5 py-1.5 text-sm transition-colors ${
