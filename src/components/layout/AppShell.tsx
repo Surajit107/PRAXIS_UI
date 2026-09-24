@@ -10,13 +10,29 @@ type AppShellProps = {
   children: ReactNode;
 };
 
-/** Marketing chrome (floating nav + footer). Docs use a dedicated sidebar shell. */
+/** Marketing chrome (floating nav + footer). Auth + docs use standalone shells. */
 export function AppShell({ children }: AppShellProps) {
   const pathname = usePathname() || "";
   const isDocs = pathname === "/docs" || pathname.startsWith("/docs/");
+  const isStandaloneAuth =
+    pathname === "/verify-email" ||
+    pathname.startsWith("/verify-email/") ||
+    pathname === "/forgot-password" ||
+    pathname.startsWith("/forgot-password/") ||
+    pathname === "/user/profile" ||
+    pathname.startsWith("/user/profile/");
 
   if (isDocs) {
     return <main className="min-h-screen">{children}</main>;
+  }
+
+  if (isStandaloneAuth) {
+    return (
+      <>
+        <ScrollTechBackdrop mode="static" />
+        <main className="relative z-10 min-h-screen">{children}</main>
+      </>
+    );
   }
 
   return (
