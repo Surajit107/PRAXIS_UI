@@ -1,0 +1,37 @@
+---
+title: Quickstart
+description: Confirm the API is up, then make your first public GET in under a minute.
+---
+
+# Quickstart
+
+## 1. Run the API
+
+Start `PRAXIS_API` locally (default `http://localhost:8000`). Confirm the UI can reach it via `NEXT_PUBLIC_PRAXIS_API_URL`.
+
+## 2. Health check
+
+```bash
+curl -s http://localhost:8000/health
+```
+
+Expect a JSON envelope with `success: true` and operational status fields.
+
+## 3. First public request
+
+Public collections do not require authentication:
+
+```bash
+curl -s "http://localhost:8000/api/v1/public/randomusers?page=1&limit=5"
+```
+
+## 4. Try it in the browser
+
+- [Playground](/playground?domain=public) — fire live requests with domain presets
+- [API Reference](/docs/api) — OpenAPI-backed Try It console
+
+## Next steps
+
+- [Making your first request](/docs/guides/first-request) — JS, TypeScript, cURL, and Python
+- [Authentication](/docs/authentication) — register and login for app domains
+- [Working with domains](/docs/guides/domains) — public vs apps vs kitchen-sink

@@ -1,0 +1,24 @@
+---
+title: Rate limits
+description: Fair-use expectations for the Praxis practice API — no invented quotas.
+---
+
+# Rate limits
+
+Praxis is a **practice and prototyping** API. There is no marketed public SLA and no guaranteed global quota advertised in the OpenAPI spec.
+
+## What that means
+
+- Do **not** assume unlimited throughput in shared or hosted deployments
+- Treat aggressive parallel scraping as abuse even when no `429` is returned locally
+- Prefer reasonable client pacing (tens of requests per second is already more than a tutorial needs)
+
+## If you receive `429`
+
+Back off exponentially, reduce concurrency, and cache public fixtures locally when you are iterating on UI.
+
+## Production systems
+
+When you leave the sandbox, design rate limiting, auth, and quotas deliberately. Praxis teaches client shape — it is not a substitute for your production edge.
+
+See also [Errors](/docs/errors) for status handling patterns.

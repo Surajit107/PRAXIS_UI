@@ -1,0 +1,76 @@
+---
+title: Making your first request
+description: Hit a public Praxis endpoint with cURL, JavaScript, TypeScript, and Python.
+---
+
+# Making your first request
+
+This guide fetches a short list of random users from the public API. No authentication required.
+
+## Endpoint
+
+`GET /api/v1/public/randomusers`
+
+Query parameters: `page`, `limit` (strings in the OpenAPI schema — pass numeric strings).
+
+## Examples
+
+<CodeTabs
+  examples={[
+    {
+      label: "cURL",
+      language: "bash",
+      code: `curl -s "http://localhost:8000/api/v1/public/randomusers?page=1&limit=3" \\
+  -H "Accept: application/json"`,
+    },
+    {
+      label: "JavaScript",
+      language: "javascript",
+      code: `const res = await fetch(
+  "http://localhost:8000/api/v1/public/randomusers?page=1&limit=3",
+  { headers: { Accept: "application/json" } },
+);
+const body = await res.json();
+console.log(body);`,
+    },
+    {
+      label: "TypeScript",
+      language: "typescript",
+      code: `type PraxisEnvelope<T> = {
+  data: T;
+  message: string;
+  statusCode: number;
+  success: boolean;
+};
+
+const res = await fetch(
+  "http://localhost:8000/api/v1/public/randomusers?page=1&limit=3",
+);
+const body = (await res.json()) as PraxisEnvelope<unknown>;
+if (!body.success) throw new Error(body.message);
+console.log(body.data);`,
+    },
+    {
+      label: "Python",
+      language: "python",
+      code: `import urllib.request
+import json
+
+url = "http://localhost:8000/api/v1/public/randomusers?page=1&limit=3"
+with urllib.request.urlopen(url) as res:
+    body = json.load(res)
+print(body)`,
+    },
+  ]}
+/>
+
+## What to inspect
+
+- HTTP status (expect `200` on success)
+- Envelope fields: `success`, `statusCode`, `message`, `data`
+- Pagination behaviour when you change `page` / `limit`
+
+## Next
+
+- [API usage](/docs/guides/api-usage) — headers, envelopes, pagination conventions
+- [API Reference](/docs/api) — full schema for this operation

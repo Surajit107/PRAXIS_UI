@@ -1,0 +1,48 @@
+---
+title: API usage
+description: Headers, response envelopes, pagination, and conventions shared across Praxis domains.
+---
+
+# API usage
+
+## Base path
+
+Most product routes live under `/api/v1/...`. System probes (`/health`, `/live`, `/ready`, `/version`) sit at the server root — see the [API Reference](/docs/api).
+
+## Headers
+
+| Header | When |
+|--------|------|
+| `Accept: application/json` | Prefer JSON responses |
+| `Content-Type: application/json` | JSON request bodies |
+| `Authorization: Bearer <token>` | Protected app routes |
+
+## Response envelope
+
+Successful and many error responses follow a shared shape:
+
+```json
+{
+  "data": {},
+  "message": "…",
+  "statusCode": 200,
+  "success": true
+}
+```
+
+Treat `success` and `statusCode` as first-class signals; do not assume every `4xx` body is unstructured.
+
+## Pagination
+
+List endpoints commonly accept `page` and `limit` query parameters. Values are often typed as strings in OpenAPI — pass `"1"`, `"10"` (or numeric strings via your client). Always confirm the operation schema in the reference.
+
+## Idempotency & verbs
+
+- Prefer `GET` for reads and public fixtures
+- Use `POST` for creates and auth actions
+- Use `PATCH` / `PUT` for updates where documented
+- Use `DELETE` for removals — kitchen-sink and danger-zone routes can be destructive; keep them local
+
+## CORS
+
+The practice API is intended for local and demo clients. If the browser blocks a cross-origin call, confirm the API CORS config and that you are targeting the URL in `NEXT_PUBLIC_PRAXIS_API_URL`.

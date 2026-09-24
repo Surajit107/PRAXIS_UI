@@ -1,0 +1,45 @@
+---
+title: Authentication
+description: Register, login, and attach JWTs for Praxis app domains (ecommerce, social, chat, todos).
+---
+
+# Authentication
+
+Public datasets are open. App domains (users, ecommerce, social, chat, todos) expect authenticated sessions.
+
+## Register
+
+```bash
+curl -s -X POST http://localhost:8000/api/v1/users/register \
+  -H "Content-Type: application/json" \
+  -d '{"username":"demo","email":"demo@example.com","password":"Password1!"}'
+```
+
+## Login
+
+```bash
+curl -s -X POST http://localhost:8000/api/v1/users/login \
+  -H "Content-Type: application/json" \
+  -d '{"username":"demo","password":"Password1!"}'
+```
+
+Store the access token from the response (field names follow the OpenAPI schemas in the [API Reference](/docs/api)).
+
+## Calling protected routes
+
+Send the bearer token on subsequent requests:
+
+```bash
+curl -s http://localhost:8000/api/v1/ecommerce/products \
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
+```
+
+## Refresh
+
+Use the refresh endpoint when access tokens expire — see **Authentication** in the [API Reference](/docs/api) for the exact payload and status codes.
+
+## Practice tips
+
+- Prefer disposable local credentials; seed/reset helpers exist for development only
+- Never commit real tokens; guides use placeholders like `YOUR_ACCESS_TOKEN`
+- Validate auth flows in the [playground](/playground?domain=apps) before wiring a client

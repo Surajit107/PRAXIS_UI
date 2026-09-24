@@ -1,0 +1,47 @@
+---
+title: Errors
+description: How Praxis signals failures — HTTP status codes and the shared JSON envelope.
+---
+
+# Errors
+
+## Read both layers
+
+1. **HTTP status** — transport-level signal (`4xx` client, `5xx` server)
+2. **Envelope** — when present, check `success`, `statusCode`, and `message`
+
+```json
+{
+  "data": null,
+  "message": "Unauthorized request",
+  "statusCode": 401,
+  "success": false
+}
+```
+
+Exact payloads vary by route — always confirm examples in the [API Reference](/docs/api).
+
+## Common statuses
+
+| Status | Meaning in practice |
+|--------|---------------------|
+| `400` | Validation or malformed body/query |
+| `401` | Missing or invalid credentials |
+| `403` | Authenticated but not allowed |
+| `404` | Unknown resource or path |
+| `409` | Conflict (duplicate registration, state clash) |
+| `429` | Throttled — see [Rate limits](/docs/rate-limits) |
+| `5xx` | Server or dependency failure |
+
+## Kitchen-sink status drills
+
+Force specific codes when testing client error handling:
+
+`GET /api/v1/kitchen-sink/status-codes/{code}`
+
+## Debugging checklist
+
+- Confirm base URL and path prefix (`/api/v1`)
+- Confirm `Content-Type` on bodies
+- Confirm `Authorization` on protected routes
+- Compare your payload to the OpenAPI example for that `operationId`

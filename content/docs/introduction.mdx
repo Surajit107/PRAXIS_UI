@@ -1,0 +1,39 @@
+---
+title: Introduction
+description: PraxisAPP is a free practice API platform — real backends, no keys, no site login.
+---
+
+# Introduction
+
+PraxisAPP gives you production-shaped HTTP surfaces so you can learn, prototype, and validate client integrations without scaffolding a backend from scratch.
+
+You get auth, ecommerce, social, chat, todos, public datasets, and HTTP utilities — all documented here and callable from the [playground](/playground).
+
+## What you get
+
+- **No API keys** for public practice routes — hit them and inspect responses immediately
+- **Auth-backed modules** when you need JWT/session behaviour (register, login, refresh)
+- **Consistent response envelopes** across domains so clients can share parsers
+- **OpenAPI as source of truth** — the interactive [API Reference](/docs/api) is generated from the same spec
+
+## Base URL
+
+Local development defaults to:
+
+```bash
+http://localhost:8000
+```
+
+Set `NEXT_PUBLIC_PRAXIS_API_URL` in the UI project if your API listens elsewhere. All guide examples use that host.
+
+## How to use these docs
+
+1. Start with [Quickstart](/docs/quickstart) for a health check and first `GET`
+2. Read [Authentication](/docs/authentication) before calling protected app routes
+3. Follow the [guides](/docs/guides/first-request) for request patterns and domain maps
+4. Open the [API Reference](/docs/api) when you need exact schemas, status codes, and Try It
+
+## Spec & version
+
+- OpenAPI: [`/openapi.yaml`](/openapi.yaml)
+- API version: **1.3.1** (see [Changelog](/docs/changelog))

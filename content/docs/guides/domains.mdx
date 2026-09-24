@@ -1,0 +1,44 @@
+---
+title: Working with domains
+description: Map Praxis public, apps, and kitchen-sink surfaces to the playground and OpenAPI tags.
+---
+
+# Working with domains
+
+Praxis groups routes into practice surfaces. Use this map to pick a starting point, then deep-dive in the [API Reference](/docs/api).
+
+## Public
+
+Ready-to-hit datasets — users, products, geo, quotes, and business-shaped collections (companies, invoices, orders, …).
+
+- Playground: [/playground?domain=public](/playground?domain=public)
+- OpenAPI tags: Public APIs, Geo APIs
+
+## Apps
+
+Authenticated product modules:
+
+| Domain | Typical base | Playground |
+|--------|--------------|------------|
+| Authentication / users | `/api/v1/users` | [apps](/playground?domain=apps) |
+| Ecommerce | `/api/v1/ecommerce` | [apps](/playground?domain=apps) |
+| Social media | `/api/v1/social-media` | [apps](/playground?domain=apps) |
+| Chat | `/api/v1/chat-app` | [apps](/playground?domain=apps) |
+| Todos | `/api/v1/todos` | [apps](/playground?domain=apps) |
+
+Read [Authentication](/docs/authentication) before calling protected ecommerce/social/chat routes.
+
+## Kitchen sink
+
+HTTP utilities for status codes, cookies, redirects, and request inspection — useful for edge-case clients, not product stories.
+
+- Playground: [/playground?domain=kitchen-sink](/playground?domain=kitchen-sink)
+- OpenAPI tag: Kitchen Sink
+
+## Operations & danger zone
+
+System health/version tags are for ops checks. **Danger Zone** and seeding helpers are development-only and can wipe or reshape local data — never point them at a shared environment you care about.
+
+## Next
+
+Browse every operation in the [API Reference](/docs/api), filtered by tag in Scalar’s sidebar.

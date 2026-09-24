@@ -1,0 +1,19 @@
+# Next.js hashed assets — immutable forever
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# OpenAPI spec — cache at the edge, revalidate daily
+/openapi.yaml
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+
+# Favicons / static media
+/favicon.ico
+  Cache-Control: public, max-age=86400
+/*.png
+  Cache-Control: public, max-age=86400
+/*.svg
+  Cache-Control: public, max-age=86400
+/*.jpg
+  Cache-Control: public, max-age=86400
+/*.webp
+  Cache-Control: public, max-age=86400

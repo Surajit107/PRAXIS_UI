@@ -1,0 +1,27 @@
+---
+title: SDKs
+description: Praxis has no official SDKs yet — use standard HTTP clients and the playground.
+---
+
+# SDKs
+
+There are **no official Praxis language SDKs** today. That is intentional for a practice API: you should wire real HTTP clients the same way you will against production services.
+
+## Recommended approach
+
+| Language | Typical stack |
+|----------|----------------|
+| JavaScript / TypeScript | `fetch`, Axios, ky |
+| Python | `httpx`, `requests`, `urllib` |
+| Shell | cURL, HTTPie |
+
+## OpenAPI-generated clients
+
+Generate typed clients from [`/openapi.yaml`](/openapi.yaml) with open-source generators (openapi-generator, openapi-typescript, etc.) if you want stronger typing. Keep the YAML as the source of truth — do not fork a second API definition.
+
+## Interactive practice
+
+- [Playground](/playground) — fire live requests without leaving the site
+- [API Reference](/docs/api) — Scalar Try It with the same OpenAPI document
+
+When first-party SDKs ship, they will be listed here and versioned in the [Changelog](/docs/changelog).
