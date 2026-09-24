@@ -263,15 +263,31 @@ function buildRadialBoard(seed: number): Board {
 function ScrollTrace({
   trace,
   progress,
+  revealed = false,
 }: {
   trace: Trace;
   progress: MotionValue<number>;
+  revealed?: boolean;
 }) {
   // Reveal from center outward as the page scrolls.
   const start = 0.05 + trace.ring * 0.55;
   const end = start + 0.12;
   const pathLength = useTransform(progress, [start, end], [0, 1]);
   const opacity = useTransform(progress, [start, end, Math.min(1, end + 0.4)], [0, 0.28, 0.1]);
+
+  if (revealed) {
+    return (
+      <path
+        d={trace.d}
+        fill="none"
+        stroke="var(--accent)"
+        strokeWidth={fmt(trace.weight)}
+        strokeLinecap="square"
+        strokeLinejoin="miter"
+        strokeOpacity={0.16}
+      />
+    );
+  }
 
   return (
     <m.path
@@ -289,12 +305,31 @@ function ScrollTrace({
 function ScrollComponent({
   item,
   progress,
+  revealed = false,
 }: {
   item: Component;
   progress: MotionValue<number>;
+  revealed?: boolean;
 }) {
   const start = 0.06 + item.ring * 0.55;
   const opacity = useTransform(progress, [start - 0.02, start + 0.08, start + 0.45], [0, 0.7, 0.45]);
+
+  if (revealed) {
+    return (
+      <rect
+        x={fmt(item.x)}
+        y={fmt(item.y)}
+        width={fmt(item.s)}
+        height={fmt(item.s)}
+        rx="0.8"
+        fill="var(--accent)"
+        fillOpacity={item.bright ? 0.06 : 0.03}
+        stroke="var(--accent)"
+        strokeOpacity={item.bright ? 0.28 : 0.14}
+        strokeWidth="1"
+      />
+    );
+  }
 
   return (
     <m.rect
@@ -316,12 +351,26 @@ function ScrollComponent({
 function ScrollGlow({
   glow,
   progress,
+  revealed = false,
 }: {
   glow: Glow;
   progress: MotionValue<number>;
+  revealed?: boolean;
 }) {
   const start = 0.08 + glow.ring * 0.55;
   const opacity = useTransform(progress, [start, start + 0.1, start + 0.5], [0, 0.45, 0.15]);
+
+  if (revealed) {
+    return (
+      <circle
+        cx={fmt(glow.x)}
+        cy={fmt(glow.y)}
+        r={fmt(glow.r)}
+        fill="var(--accent)"
+        fillOpacity="0.1"
+      />
+    );
+  }
 
   return (
     <m.circle
@@ -338,11 +387,17 @@ function ScrollGlow({
 /**
  * Radial PCB backdrop — central die, fanning traces, square packages.
  * Honeycomb opacity language; scroll reveals from the core outward.
+ *
+ * `mode="static"` reveals the full board at a muted shade for short auth pages
+ * (scroll-tied pathLength would otherwise stay at 0).
  */
-export function ScrollTechBackdrop() {
+export function ScrollTechBackdrop({ mode = "scroll" }: { mode?: "scroll" | "static" } = {}) {
   const reduceMotion = useReducedMotion() === true;
   const [mounted, setMounted] = useState(false);
-  const progress = useDocumentScrollProgress(reduceMotion || !mounted);
+  const isStatic = mode === "static";
+  const scrollProgress = useDocumentScrollProgress(reduceMotion || !mounted || isStatic);
+  const staticProgress = useMotionValue(1);
+  const progress = isStatic ? staticProgress : scrollProgress;
   const board = useMemo(() => buildRadialBoard(47), []);
   const uid = useId().replace(/[^a-zA-Z0-9]/g, "");
   const logoGlowId = `die-logo-glow-${uid}`;
@@ -358,16 +413,22 @@ export function ScrollTechBackdrop() {
   const logoGlow = useTransform(progress, [0.08, 0.25, 0.55, 0.85], [0.25, 0.75, 0.9, 0.35]);
 
   // Client-only: avoid SSR float / prefers-reduced-motion hydration mismatches.
-  if (!mounted || reduceMotion) return null;
+  // Static auth pages still render under reduce-motion (fixed frame, no scroll sync).
+  if (!mounted) return null;
+  if (reduceMotion && !isStatic) return null;
 
   return (
     <div aria-hidden className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
       <m.div
         style={{
-          opacity: stageOpacity,
-          // Soft vignette — detail in center/mid, fade at corners (like the reference).
-          maskImage: "radial-gradient(ellipse 62% 58% at 50% 46%, #000 18%, transparent 100%)",
-          WebkitMaskImage: "radial-gradient(ellipse 62% 58% at 50% 46%, #000 18%, transparent 100%)",
+          opacity: isStatic ? 0.38 : stageOpacity,
+          // Soft vignette — slightly wider on auth, still shaded toward edges.
+          maskImage: isStatic
+            ? "radial-gradient(ellipse 72% 64% at 50% 46%, #000 22%, transparent 100%)"
+            : "radial-gradient(ellipse 62% 58% at 50% 46%, #000 18%, transparent 100%)",
+          WebkitMaskImage: isStatic
+            ? "radial-gradient(ellipse 72% 64% at 50% 46%, #000 22%, transparent 100%)"
+            : "radial-gradient(ellipse 62% 58% at 50% 46%, #000 18%, transparent 100%)",
         }}
         className="absolute inset-0"
       >
@@ -380,7 +441,7 @@ export function ScrollTechBackdrop() {
         />
 
         <m.svg
-          style={{ y: driftY }}
+          style={{ y: isStatic ? 0 : driftY }}
           className="absolute inset-0 h-[115%] w-full"
           viewBox={`0 0 ${VIEW_W} ${VIEW_H}`}
           preserveAspectRatio="xMidYMid slice"
@@ -403,17 +464,17 @@ export function ScrollTechBackdrop() {
 
           {/* Traces fan out from the die */}
           {board.traces.map((trace) => (
-            <ScrollTrace key={trace.id} trace={trace} progress={progress} />
+            <ScrollTrace key={trace.id} trace={trace} progress={progress} revealed={isStatic} />
           ))}
 
           {/* Square packages on the runs */}
           {board.components.map((item) => (
-            <ScrollComponent key={item.id} item={item} progress={progress} />
+            <ScrollComponent key={item.id} item={item} progress={progress} revealed={isStatic} />
           ))}
 
           {/* Hotspot nodes */}
           {board.glows.map((glow) => (
-            <ScrollGlow key={glow.id} glow={glow} progress={progress} />
+            <ScrollGlow key={glow.id} glow={glow} progress={progress} revealed={isStatic} />
           ))}
 
           {/* Vias */}
@@ -425,13 +486,13 @@ export function ScrollTechBackdrop() {
               r={fmt(via.r)}
               fill="none"
               stroke="var(--accent)"
-              strokeOpacity="0.12"
+              strokeOpacity={isStatic ? 0.1 : 0.12}
               strokeWidth="1"
             />
           ))}
 
           {/* Central die — logo hub */}
-          <m.g style={{ opacity: dieOpacity }}>
+          <m.g style={{ opacity: isStatic ? 0.55 : dieOpacity }}>
             <rect
               x={CX - DIE - 6}
               y={CY - DIE - 6}
@@ -461,13 +522,13 @@ export function ScrollTechBackdrop() {
               cy={CY}
               r={DIE * 0.85}
               fill={`url(#${logoGlowId}-bloom)`}
-              style={{ opacity: logoGlow }}
+              style={{ opacity: isStatic ? 0.35 : logoGlow }}
             />
 
             {/* Praxis hex mark */}
             <m.g
               filter={`url(#${logoGlowId})`}
-              style={{ opacity: logoGlow }}
+              style={{ opacity: isStatic ? 0.4 : logoGlow }}
               transform={`translate(${CX} ${CY}) scale(2.85) translate(-16 -16)`}
             >
               <polygon

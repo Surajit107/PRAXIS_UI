@@ -176,9 +176,9 @@ export function SiteNav() {
         backdrop-filter when both live on the same node.
       */}
       <div className="pointer-events-auto relative w-full max-w-[56rem]">
-        <div className="nav-shell absolute inset-0 rounded-[20px] lg:rounded-full" aria-hidden />
+        <div className="nav-shell absolute inset-0 rounded-[20px]" aria-hidden />
 
-        <div className="relative overflow-hidden rounded-[20px] lg:rounded-full">
+        <div className="relative overflow-hidden rounded-[20px]">
           <div className="flex h-12 items-center gap-2 px-2.5 sm:h-[52px] sm:gap-3 sm:px-3">
             <div className="shrink-0 pl-1.5 sm:pl-2">
               <BrandLogo />
