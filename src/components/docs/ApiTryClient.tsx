@@ -6,9 +6,9 @@ import { Button } from "@/components/ui/Button";
 import { JsonHighlight } from "@/components/ui/JsonHighlight";
 import { Select, type SelectOption } from "@/components/ui/Select";
 import { SmartLink } from "@/components/ui/SmartLink";
+import { useResolvedApiServerUrl } from "@/hooks/useResolvedApiUrls";
 import {
   getApiBaseUrl,
-  getApiServerUrl,
   isPlaygroundHttpMethod,
   methodToneClass,
   playgroundHttpMethods,
@@ -46,7 +46,7 @@ async function readBody(response: Response): Promise<string> {
 
 export function ApiTryClient({ initialMethod, initialPath }: ApiTryClientProps) {
   const fetchBase = useMemo(() => getApiBaseUrl(), []);
-  const displayBase = useMemo(() => getApiServerUrl(), []);
+  const displayBase = useResolvedApiServerUrl();
   const [method, setMethod] = useState<PlaygroundHttpMethod>(() =>
     isPlaygroundHttpMethod(initialMethod ?? "") ? (initialMethod as PlaygroundHttpMethod) : "GET",
   );

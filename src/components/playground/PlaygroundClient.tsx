@@ -7,10 +7,10 @@ import { Button } from "@/components/ui/Button";
 import { CopyButton } from "@/components/ui/CopyButton";
 import { JsonHighlight } from "@/components/ui/JsonHighlight";
 import { Select, type SelectOption } from "@/components/ui/Select";
+import { useResolvedApiDisplayOrigin } from "@/hooks/useResolvedApiUrls";
 import {
   domains,
   getApiBaseUrl,
-  getApiServerUrl,
   isPlaygroundHttpMethod,
   kitchenSinkActions,
   methodToneClass,
@@ -104,7 +104,8 @@ type PlaygroundProps = {
 
 export function PlaygroundClient({ initialDomain, initialCode }: PlaygroundProps) {
   const fetchBaseUrl = useMemo(() => getApiBaseUrl(), []);
-  const displayBaseUrl = useMemo(() => getApiServerUrl(), []);
+  // Paths already include `/api/v1/...` — use origin/proxy prefix only (not `…/api/v1`).
+  const displayBaseUrl = useResolvedApiDisplayOrigin();
   const [domain, setDomain] = useState<DomainId>(() => resolveDomain(initialDomain));
   const [request, setRequest] = useState<Preset>(() => resolveInitialRequest(resolveDomain(initialDomain), initialCode));
   const [result, setResult] = useState<RequestResult>({ kind: "idle" });
