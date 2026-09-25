@@ -499,7 +499,7 @@ export function statusCodePath(code: number): string {
   return `/api/v1/kitchen-sink/status-codes/${code}`;
 }
 
-/** Same-origin path proxy used when the configured API target is loopback. */
+/** Same-origin path proxy for browser fetches (avoids CORS). */
 export const API_PATH_PROXY_PREFIX = "/praxis-api";
 
 function stripTrailingSlash(url: string): string {
@@ -534,26 +534,6 @@ export type ApiUrlResolveOptions = {
   requestOrigin?: string | null;
 };
 
-/**
- * Non-loopback site origin if known — build env, request host, or browser location.
- * Used to advertise the public `/praxis-api` surface when NEXT_PUBLIC still points at localhost.
- */
-export function getPublicSiteOrigin(options?: ApiUrlResolveOptions): string | null {
-  const candidates = [
-    options?.requestOrigin,
-    process.env.NEXT_PUBLIC_SITE_URL,
-    typeof window !== "undefined" ? window.location.origin : "",
-  ];
-
-  for (const raw of candidates) {
-    if (!raw) continue;
-    const origin = toHttpOrigin(stripTrailingSlash(raw));
-    if (origin && !isLoopbackHttpUrl(origin)) return origin;
-  }
-
-  return null;
-}
-
 /** Default Praxis API base (OpenAPI `servers.url` + Scalar Try It). */
 export const DEFAULT_API_SERVER_URL = "http://localhost:8000/api/v1";
 
@@ -561,51 +541,31 @@ export const DEFAULT_API_SERVER_URL = "http://localhost:8000/api/v1";
 export const DEFAULT_API_ORIGIN = "http://localhost:8000";
 
 /**
- * Real Praxis API base URL shown in API Reference / CTA / OAuth start.
- * Matches backend mount: `{host}/api/v1`.
+ * Absolute Praxis API base (`…/api/v1`) for Scalar Try It, CTA curl, OAuth start.
  *
- * When `NEXT_PUBLIC_PRAXIS_API_URL` is missing or still loopback but the site is
- * served from a public host (Cloudflare), advertise the same-origin path proxy
- * so curl/docs never tell users to hit localhost.
+ * Must be the real API host — never the UI `/praxis-api` path proxy.
+ * Scalar sends this URL through `/scalar-proxy`, which only allows the upstream
+ * API origin (`PRAXIS_API_PROXY_TARGET` / Render).
  */
-export function getApiServerUrl(options?: ApiUrlResolveOptions): string {
+export function getApiServerUrl(_options?: ApiUrlResolveOptions): string {
   const configured = getConfiguredApiUrl();
-
-  if (configured && !isLoopbackHttpUrl(configured)) {
-    return withApiV1Mount(configured);
-  }
-
-  const siteOrigin = getPublicSiteOrigin(options);
-  if (siteOrigin) {
-    return `${siteOrigin}${API_PATH_PROXY_PREFIX}/api/v1`;
-  }
-
   if (!configured) return DEFAULT_API_SERVER_URL;
   return withApiV1Mount(configured);
 }
 
 /**
  * Origin prefix for URLs that already include `/api/v1/...` (playground chrome/snippets).
- * Strips the trailing `/api/v1` mount from {@link getApiServerUrl}.
  */
 export function getApiDisplayOrigin(options?: ApiUrlResolveOptions): string {
   return getApiServerUrl(options).replace(/\/api\/v1$/i, "");
 }
 
 /**
- * Browser fetch base for the playground. Loopback targets go through the
- * same-origin path proxy to avoid CORS; remote URLs use the API host origin.
- * Playground / try-it request paths already include `/api/v1/...`, so this
- * must never include the `/api/v1` mount (use {@link getApiServerUrl} for that).
+ * Browser fetch base — always same-origin path proxy (CORS-safe).
+ * Paths already include `/api/v1/...`. Display/curl use {@link getApiServerUrl}.
  */
 export function getApiBaseUrl(): string {
-  const configured = getConfiguredApiUrl();
-
-  if (!configured || isLoopbackHttpUrl(configured)) {
-    return API_PATH_PROXY_PREFIX;
-  }
-
-  return toHttpOrigin(configured);
+  return API_PATH_PROXY_PREFIX;
 }
 
 /** Scalar Try It CORS proxy (`?scalar_url=` protocol). */
@@ -614,8 +574,8 @@ export function getScalarProxyUrl(): string {
 }
 
 /**
- * Upstream host for `/praxis-api/*` path proxy.
- * Must be the API origin only — playground paths are `/api/v1/...`.
+ * Upstream host for `/praxis-api/*` and `/scalar-proxy`.
+ * Must be the API origin only — paths are `/api/v1/...`.
  */
 export function getApiProxyTarget(): string {
   const explicit = process.env.PRAXIS_API_PROXY_TARGET
