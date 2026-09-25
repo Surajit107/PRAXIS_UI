@@ -499,6 +499,9 @@ export function statusCodePath(code: number): string {
   return `/api/v1/kitchen-sink/status-codes/${code}`;
 }
 
+/** Same-origin path proxy used when the configured API target is loopback. */
+export const API_PATH_PROXY_PREFIX = "/praxis-api";
+
 function stripTrailingSlash(url: string): string {
   return url.replace(/\/$/, "");
 }
@@ -515,6 +518,42 @@ function toHttpOrigin(url: string): string {
   }
 }
 
+function getConfiguredApiUrl(): string {
+  return process.env.NEXT_PUBLIC_PRAXIS_API_URL
+    ? stripTrailingSlash(process.env.NEXT_PUBLIC_PRAXIS_API_URL)
+    : "";
+}
+
+function withApiV1Mount(url: string): string {
+  if (/\/api\/v1$/i.test(url)) return url;
+  return `${toHttpOrigin(url)}/api/v1`;
+}
+
+export type ApiUrlResolveOptions = {
+  /** Incoming request origin (e.g. from `x-forwarded-host`) when resolving on the server. */
+  requestOrigin?: string | null;
+};
+
+/**
+ * Non-loopback site origin if known — build env, request host, or browser location.
+ * Used to advertise the public `/praxis-api` surface when NEXT_PUBLIC still points at localhost.
+ */
+export function getPublicSiteOrigin(options?: ApiUrlResolveOptions): string | null {
+  const candidates = [
+    options?.requestOrigin,
+    process.env.NEXT_PUBLIC_SITE_URL,
+    typeof window !== "undefined" ? window.location.origin : "",
+  ];
+
+  for (const raw of candidates) {
+    if (!raw) continue;
+    const origin = toHttpOrigin(stripTrailingSlash(raw));
+    if (origin && !isLoopbackHttpUrl(origin)) return origin;
+  }
+
+  return null;
+}
+
 /** Default Praxis API base (OpenAPI `servers.url` + Scalar Try It). */
 export const DEFAULT_API_SERVER_URL = "http://localhost:8000/api/v1";
 
@@ -522,25 +561,35 @@ export const DEFAULT_API_SERVER_URL = "http://localhost:8000/api/v1";
 export const DEFAULT_API_ORIGIN = "http://localhost:8000";
 
 /**
- * Real Praxis API base URL shown in API Reference / playground chrome.
+ * Real Praxis API base URL shown in API Reference / CTA / OAuth start.
  * Matches backend mount: `{host}/api/v1`.
+ *
+ * When `NEXT_PUBLIC_PRAXIS_API_URL` is missing or still loopback but the site is
+ * served from a public host (Cloudflare), advertise the same-origin path proxy
+ * so curl/docs never tell users to hit localhost.
  */
-export function getApiServerUrl(): string {
-  const configured = process.env.NEXT_PUBLIC_PRAXIS_API_URL
-    ? stripTrailingSlash(process.env.NEXT_PUBLIC_PRAXIS_API_URL)
-    : "";
+export function getApiServerUrl(options?: ApiUrlResolveOptions): string {
+  const configured = getConfiguredApiUrl();
 
-  if (!configured) return DEFAULT_API_SERVER_URL;
-
-  // Remote absolute URL — use as-is (may already include /api/v1).
-  if (!isLoopbackHttpUrl(configured)) return configured;
-
-  // Loopback without version prefix → append /api/v1.
-  if (!/\/api\/v1$/i.test(configured)) {
-    return `${toHttpOrigin(configured)}/api/v1`;
+  if (configured && !isLoopbackHttpUrl(configured)) {
+    return withApiV1Mount(configured);
   }
 
-  return configured;
+  const siteOrigin = getPublicSiteOrigin(options);
+  if (siteOrigin) {
+    return `${siteOrigin}${API_PATH_PROXY_PREFIX}/api/v1`;
+  }
+
+  if (!configured) return DEFAULT_API_SERVER_URL;
+  return withApiV1Mount(configured);
+}
+
+/**
+ * Origin prefix for URLs that already include `/api/v1/...` (playground chrome/snippets).
+ * Strips the trailing `/api/v1` mount from {@link getApiServerUrl}.
+ */
+export function getApiDisplayOrigin(options?: ApiUrlResolveOptions): string {
+  return getApiServerUrl(options).replace(/\/api\/v1$/i, "");
 }
 
 /**
@@ -550,12 +599,10 @@ export function getApiServerUrl(): string {
  * must never include the `/api/v1` mount (use {@link getApiServerUrl} for that).
  */
 export function getApiBaseUrl(): string {
-  const configured = process.env.NEXT_PUBLIC_PRAXIS_API_URL
-    ? stripTrailingSlash(process.env.NEXT_PUBLIC_PRAXIS_API_URL)
-    : "";
+  const configured = getConfiguredApiUrl();
 
   if (!configured || isLoopbackHttpUrl(configured)) {
-    return "/praxis-api";
+    return API_PATH_PROXY_PREFIX;
   }
 
   return toHttpOrigin(configured);
@@ -576,10 +623,8 @@ export function getApiProxyTarget(): string {
     : "";
   if (explicit) return toHttpOrigin(explicit);
 
-  const publicUrl = process.env.NEXT_PUBLIC_PRAXIS_API_URL
-    ? stripTrailingSlash(process.env.NEXT_PUBLIC_PRAXIS_API_URL)
-    : "";
-  if (publicUrl && /^https?:\/\//i.test(publicUrl)) {
+  const publicUrl = getConfiguredApiUrl();
+  if (publicUrl && /^https?:\/\//i.test(publicUrl) && !isLoopbackHttpUrl(publicUrl)) {
     return toHttpOrigin(publicUrl);
   }
 

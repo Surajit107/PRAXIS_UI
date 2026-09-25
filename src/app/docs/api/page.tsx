@@ -5,7 +5,10 @@ import { ScalarReferenceLoader } from "@/components/docs/ScalarReferenceLoader";
 import { docsPageMetadata } from "@/lib/docs/metadata";
 import { getApiServerUrl } from "@/lib/praxis";
 
-/** Scalar mounts client-side; the route shell stays static for Workers. */
+/**
+ * Shell can be static; Scalar still rewrites servers client-side via
+ * `getApiServerUrl()` (SITE_URL / window) so Cloudflare never shows localhost.
+ */
 export const dynamic = "force-static";
 export const revalidate = false;
 

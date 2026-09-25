@@ -4,6 +4,7 @@ import { ApiReferenceReact } from "@scalar/api-reference-react";
 import "@scalar/api-reference-react/style.css";
 import { useEffect, useState } from "react";
 import { stripOpenApiEmojis } from "@/lib/docs/clean-openapi";
+import { useResolvedApiServerUrl } from "@/hooks/useResolvedApiUrls";
 import { getApiServerUrl, getScalarProxyUrl } from "@/lib/praxis";
 import { themeColors } from "@/lib/theme";
 
@@ -24,7 +25,7 @@ function withApiServerUrl(yaml: string, serverUrl: string): string {
 export function ScalarReference() {
   const [spec, setSpec] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const serverUrl = getApiServerUrl();
+  const serverUrl = useResolvedApiServerUrl();
   const proxyUrl = getScalarProxyUrl();
 
   useEffect(() => {
