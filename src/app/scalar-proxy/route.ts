@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getApiProxyTarget } from "@/lib/praxis";
+import { API_PATH_PROXY_PREFIX, getApiProxyTarget } from "@/lib/praxis";
 
 export const dynamic = "force-dynamic";
 
@@ -25,6 +25,19 @@ function allowedUpstreamOrigins(): Set<string> {
   }
   origins.add("http://127.0.0.1:8000");
   return origins;
+}
+
+/**
+ * Map UI path-proxy URLs back to the real API origin before the allowlist check.
+ * Scalar must target the API host; this recovers if a build still advertised `/praxis-api`.
+ */
+function resolveUpstream(target: URL): URL {
+  if (!target.pathname.startsWith(API_PATH_PROXY_PREFIX)) return target;
+
+  const apiOrigin = getApiProxyTarget();
+  const stripped =
+    target.pathname.slice(API_PATH_PROXY_PREFIX.length) || "/";
+  return new URL(`${stripped}${target.search}`, `${apiOrigin}/`);
 }
 
 function filterRequestHeaders(source: Headers): Headers {
@@ -53,15 +66,17 @@ async function proxy(request: NextRequest): Promise<Response> {
     );
   }
 
-  let target: URL;
+  let parsed: URL;
   try {
-    target = new URL(scalarUrl);
+    parsed = new URL(scalarUrl);
   } catch {
     return NextResponse.json(
       { error: "invalid_scalar_url", message: "scalar_url must be an absolute URL" },
       { status: 400 },
     );
   }
+
+  const target = resolveUpstream(parsed);
 
   if (!allowedUpstreamOrigins().has(target.origin)) {
     return NextResponse.json(

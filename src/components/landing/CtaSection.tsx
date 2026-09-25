@@ -4,14 +4,12 @@ import { Button } from "@/components/ui/Button";
 import { CopyButton } from "@/components/ui/CopyButton";
 import { HoneycombBackground } from "@/components/visual/HoneycombBackground";
 import { apiCounts, getApiServerUrl } from "@/lib/praxis";
-import { getRequestOrigin } from "@/lib/request-origin";
 
 /** Path relative to OpenAPI server base (`…/api/v1`). */
 const SAMPLE_PATH = "/public/randomusers?limit=5";
 
-export async function CtaSection() {
-  const requestOrigin = await getRequestOrigin();
-  const command = `curl ${getApiServerUrl({ requestOrigin })}${SAMPLE_PATH}`;
+export function CtaSection() {
+  const command = `curl ${getApiServerUrl()}${SAMPLE_PATH}`;
 
   return (
     <section className="relative overflow-hidden pb-4">
