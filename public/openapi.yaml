@@ -33,8 +33,6 @@ info:
 servers:
   - url: https://praxis-api-kjrf.onrender.com/api/v1
     description: Production Praxis API
-  - url: http://localhost:8000/api/v1
-    description: Local Praxis API
 paths:
   /public/randomusers:
     get:
@@ -18998,7 +18996,7 @@ paths:
                               refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDg5NjI2ZGMyNjVmMGFhMmRiYjczYTQiLCJpYXQiOjE2ODY3Mjc3MjAsImV4cCI6MTY4NzU5MTcyMH0.sesIJ2P7EqaauA8JbNFe-7vbWMhH7uhiPn25x4zUG0I
                           host:
                             type: string
-                            example: localhost:8000
+                            example: praxis-api-kjrf.onrender.com
                           postman-token:
                             type: string
                             example: cc843cab-717e-45f2-a45b-8bc69dbeed51
@@ -19014,7 +19012,7 @@ paths:
                       url:
                         type: string
                         example: >-
-                          http://localhost:8000/api/v1/kitchen-sink/http-methods/get
+                          https://praxis-api-kjrf.onrender.com/api/v1/kitchen-sink/http-methods/get
                   message:
                     type: string
                     example: GET request
@@ -19036,13 +19034,13 @@ paths:
                         cookie: >-
                           accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDg5NjI2ZGMyNjVmMGFhMmRiYjczYTQiLCJlbWFpbCI6IndhamUuc2h1YmhhbTExMTJAZ21haWwuY29tIiwidXNlcm5hbWUiOiJ3YWplc2h1YmhhbTIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2ODY3Mjc3MjAsImV4cCI6MTY4NjgxNDEyMH0.X7DSYAaqIFVtNxqDSYWW40NNoxu-npBh0Yo7dsPIfBg;
                           refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDg5NjI2ZGMyNjVmMGFhMmRiYjczYTQiLCJpYXQiOjE2ODY3Mjc3MjAsImV4cCI6MTY4NzU5MTcyMH0.sesIJ2P7EqaauA8JbNFe-7vbWMhH7uhiPn25x4zUG0I
-                        host: localhost:8000
+                        host: praxis-api-kjrf.onrender.com
                         postman-token: cc843cab-717e-45f2-a45b-8bc69dbeed51
                         user-agent: PostmanRuntime/7.32.2
                       method: GET
                       origin: '::ffff:172.27.0.3'
                       url: >-
-                        http://localhost:8000/api/v1/kitchen-sink/http-methods/get
+                        https://praxis-api-kjrf.onrender.com/api/v1/kitchen-sink/http-methods/get
                     message: GET request
                     statusCode: 200
                     success: true
@@ -19145,7 +19143,7 @@ paths:
                               refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDg5NjI2ZGMyNjVmMGFhMmRiYjczYTQiLCJpYXQiOjE2ODY3Mjc3MjAsImV4cCI6MTY4NzU5MTcyMH0.sesIJ2P7EqaauA8JbNFe-7vbWMhH7uhiPn25x4zUG0I
                           host:
                             type: string
-                            example: localhost:8000
+                            example: praxis-api-kjrf.onrender.com
                           postman-token:
                             type: string
                             example: b38af068-46cf-4301-84e3-43c8976ffc6f
@@ -19161,7 +19159,7 @@ paths:
                       url:
                         type: string
                         example: >-
-                          http://localhost:8000/api/v1/kitchen-sink/http-methods/post
+                          https://praxis-api-kjrf.onrender.com/api/v1/kitchen-sink/http-methods/post
                   message:
                     type: string
                     example: POST request
@@ -19184,13 +19182,13 @@ paths:
                         cookie: >-
                           accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDg5NjI2ZGMyNjVmMGFhMmRiYjczYTQiLCJlbWFpbCI6IndhamUuc2h1YmhhbTExMTJAZ21haWwuY29tIiwidXNlcm5hbWUiOiJ3YWplc2h1YmhhbTIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2ODY3Mjc3MjAsImV4cCI6MTY4NjgxNDEyMH0.X7DSYAaqIFVtNxqDSYWW40NNoxu-npBh0Yo7dsPIfBg;
                           refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDg5NjI2ZGMyNjVmMGFhMmRiYjczYTQiLCJpYXQiOjE2ODY3Mjc3MjAsImV4cCI6MTY4NzU5MTcyMH0.sesIJ2P7EqaauA8JbNFe-7vbWMhH7uhiPn25x4zUG0I
-                        host: localhost:8000
+                        host: praxis-api-kjrf.onrender.com
                         postman-token: b38af068-46cf-4301-84e3-43c8976ffc6f
                         user-agent: PostmanRuntime/7.32.2
                       method: POST
                       origin: '::ffff:172.27.0.3'
                       url: >-
-                        http://localhost:8000/api/v1/kitchen-sink/http-methods/post
+                        https://praxis-api-kjrf.onrender.com/api/v1/kitchen-sink/http-methods/post
                     message: POST request
                     statusCode: 200
                     success: true
@@ -19292,7 +19290,7 @@ paths:
                               refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDg5NjI2ZGMyNjVmMGFhMmRiYjczYTQiLCJpYXQiOjE2ODY3Mjc3MjAsImV4cCI6MTY4NzU5MTcyMH0.sesIJ2P7EqaauA8JbNFe-7vbWMhH7uhiPn25x4zUG0I
                           host:
                             type: string
-                            example: localhost:8000
+                            example: praxis-api-kjrf.onrender.com
                           postman-token:
                             type: string
                             example: 637929c8-faf9-4f8c-a053-7c0724959b15
@@ -19308,7 +19306,7 @@ paths:
                       url:
                         type: string
                         example: >-
-                          http://localhost:8000/api/v1/kitchen-sink/http-methods/put
+                          https://praxis-api-kjrf.onrender.com/api/v1/kitchen-sink/http-methods/put
                   message:
                     type: string
                     example: PUT request
@@ -19331,13 +19329,13 @@ paths:
                         cookie: >-
                           accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDg5NjI2ZGMyNjVmMGFhMmRiYjczYTQiLCJlbWFpbCI6IndhamUuc2h1YmhhbTExMTJAZ21haWwuY29tIiwidXNlcm5hbWUiOiJ3YWplc2h1YmhhbTIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2ODY3Mjc3MjAsImV4cCI6MTY4NjgxNDEyMH0.X7DSYAaqIFVtNxqDSYWW40NNoxu-npBh0Yo7dsPIfBg;
                           refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDg5NjI2ZGMyNjVmMGFhMmRiYjczYTQiLCJpYXQiOjE2ODY3Mjc3MjAsImV4cCI6MTY4NzU5MTcyMH0.sesIJ2P7EqaauA8JbNFe-7vbWMhH7uhiPn25x4zUG0I
-                        host: localhost:8000
+                        host: praxis-api-kjrf.onrender.com
                         postman-token: 637929c8-faf9-4f8c-a053-7c0724959b15
                         user-agent: PostmanRuntime/7.32.2
                       method: PUT
                       origin: '::ffff:172.27.0.3'
                       url: >-
-                        http://localhost:8000/api/v1/kitchen-sink/http-methods/put
+                        https://praxis-api-kjrf.onrender.com/api/v1/kitchen-sink/http-methods/put
                     message: PUT request
                     statusCode: 200
                     success: true
@@ -19440,7 +19438,7 @@ paths:
                               refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDg5NjI2ZGMyNjVmMGFhMmRiYjczYTQiLCJpYXQiOjE2ODY3Mjc3MjAsImV4cCI6MTY4NzU5MTcyMH0.sesIJ2P7EqaauA8JbNFe-7vbWMhH7uhiPn25x4zUG0I
                           host:
                             type: string
-                            example: localhost:8000
+                            example: praxis-api-kjrf.onrender.com
                           postman-token:
                             type: string
                             example: 132a6fb0-68c7-43ec-b082-a697a3014c6d
@@ -19456,7 +19454,7 @@ paths:
                       url:
                         type: string
                         example: >-
-                          http://localhost:8000/api/v1/kitchen-sink/http-methods/patch
+                          https://praxis-api-kjrf.onrender.com/api/v1/kitchen-sink/http-methods/patch
                   message:
                     type: string
                     example: PATCH request
@@ -19479,13 +19477,13 @@ paths:
                         cookie: >-
                           accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDg5NjI2ZGMyNjVmMGFhMmRiYjczYTQiLCJlbWFpbCI6IndhamUuc2h1YmhhbTExMTJAZ21haWwuY29tIiwidXNlcm5hbWUiOiJ3YWplc2h1YmhhbTIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2ODY3Mjc3MjAsImV4cCI6MTY4NjgxNDEyMH0.X7DSYAaqIFVtNxqDSYWW40NNoxu-npBh0Yo7dsPIfBg;
                           refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDg5NjI2ZGMyNjVmMGFhMmRiYjczYTQiLCJpYXQiOjE2ODY3Mjc3MjAsImV4cCI6MTY4NzU5MTcyMH0.sesIJ2P7EqaauA8JbNFe-7vbWMhH7uhiPn25x4zUG0I
-                        host: localhost:8000
+                        host: praxis-api-kjrf.onrender.com
                         postman-token: 132a6fb0-68c7-43ec-b082-a697a3014c6d
                         user-agent: PostmanRuntime/7.32.2
                       method: PATCH
                       origin: '::ffff:172.27.0.3'
                       url: >-
-                        http://localhost:8000/api/v1/kitchen-sink/http-methods/patch
+                        https://praxis-api-kjrf.onrender.com/api/v1/kitchen-sink/http-methods/patch
                     message: PATCH request
                     statusCode: 200
                     success: true
@@ -19583,7 +19581,7 @@ paths:
                               refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDg5NjI2ZGMyNjVmMGFhMmRiYjczYTQiLCJpYXQiOjE2ODY3Mjc3MjAsImV4cCI6MTY4NzU5MTcyMH0.sesIJ2P7EqaauA8JbNFe-7vbWMhH7uhiPn25x4zUG0I
                           host:
                             type: string
-                            example: localhost:8000
+                            example: praxis-api-kjrf.onrender.com
                           postman-token:
                             type: string
                             example: 0474647d-e133-4a80-ad6a-d0aba3c2ae6e
@@ -19599,7 +19597,7 @@ paths:
                       url:
                         type: string
                         example: >-
-                          http://localhost:8000/api/v1/kitchen-sink/http-methods/delete
+                          https://praxis-api-kjrf.onrender.com/api/v1/kitchen-sink/http-methods/delete
                   message:
                     type: string
                     example: DELETE request
@@ -19621,13 +19619,13 @@ paths:
                         cookie: >-
                           accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDg5NjI2ZGMyNjVmMGFhMmRiYjczYTQiLCJlbWFpbCI6IndhamUuc2h1YmhhbTExMTJAZ21haWwuY29tIiwidXNlcm5hbWUiOiJ3YWplc2h1YmhhbTIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2ODY3Mjc3MjAsImV4cCI6MTY4NjgxNDEyMH0.X7DSYAaqIFVtNxqDSYWW40NNoxu-npBh0Yo7dsPIfBg;
                           refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDg5NjI2ZGMyNjVmMGFhMmRiYjczYTQiLCJpYXQiOjE2ODY3Mjc3MjAsImV4cCI6MTY4NzU5MTcyMH0.sesIJ2P7EqaauA8JbNFe-7vbWMhH7uhiPn25x4zUG0I
-                        host: localhost:8000
+                        host: praxis-api-kjrf.onrender.com
                         postman-token: 0474647d-e133-4a80-ad6a-d0aba3c2ae6e
                         user-agent: PostmanRuntime/7.32.2
                       method: DELETE
                       origin: '::ffff:172.27.0.3'
                       url: >-
-                        http://localhost:8000/api/v1/kitchen-sink/http-methods/delete
+                        https://praxis-api-kjrf.onrender.com/api/v1/kitchen-sink/http-methods/delete
                     message: DELETE request
                     statusCode: 200
                     success: true
@@ -21375,7 +21373,7 @@ paths:
                               refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDg5NjI2ZGMyNjVmMGFhMmRiYjczYTQiLCJpYXQiOjE2ODY3Mjc3MjAsImV4cCI6MTY4NzU5MTcyMH0.sesIJ2P7EqaauA8JbNFe-7vbWMhH7uhiPn25x4zUG0I
                           host:
                             type: string
-                            example: localhost:8000
+                            example: praxis-api-kjrf.onrender.com
                           postman-token:
                             type: string
                             example: 7c2f7cd1-a242-47d1-9121-dafdadd3f611
@@ -21403,7 +21401,7 @@ paths:
                         cookie: >-
                           accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDg5NjI2ZGMyNjVmMGFhMmRiYjczYTQiLCJlbWFpbCI6IndhamUuc2h1YmhhbTExMTJAZ21haWwuY29tIiwidXNlcm5hbWUiOiJ3YWplc2h1YmhhbTIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2ODY3Mjc3MjAsImV4cCI6MTY4NjgxNDEyMH0.X7DSYAaqIFVtNxqDSYWW40NNoxu-npBh0Yo7dsPIfBg;
                           refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDg5NjI2ZGMyNjVmMGFhMmRiYjczYTQiLCJpYXQiOjE2ODY3Mjc3MjAsImV4cCI6MTY4NzU5MTcyMH0.sesIJ2P7EqaauA8JbNFe-7vbWMhH7uhiPn25x4zUG0I
-                        host: localhost:8000
+                        host: praxis-api-kjrf.onrender.com
                         postman-token: 7c2f7cd1-a242-47d1-9121-dafdadd3f611
                         user-agent: PostmanRuntime/7.32.2
                     message: Request headers returned
@@ -24448,7 +24446,7 @@ paths:
                           url:
                             type: string
                             example: >-
-                              http://localhost:8000/images/plastic168810754602425641.jpeg
+                              https://praxis-api-kjrf.onrender.com/images/plastic168810754602425641.jpeg
                       createdAt:
                         type: string
                         example: '2023-06-30T06:42:26.163Z'
@@ -24504,7 +24502,7 @@ paths:
                         _id: 649e7a1a64e7dba29b726965
                         localPath: public/images/plastic168810754602425641.jpeg
                         url: >-
-                          http://localhost:8000/images/plastic168810754602425641.jpeg
+                          https://praxis-api-kjrf.onrender.com/images/plastic168810754602425641.jpeg
                       createdAt: '2023-06-30T06:42:26.163Z'
                       email: user.email@domain.com
                       emailVerificationExpiry: '2023-06-30T07:02:26.246Z'
@@ -26117,7 +26115,7 @@ paths:
                       mainImage:
                         type: string
                         example: >-
-                          http://localhost:8000/images/933e65fe78b096f07ac7fa60caf07d13
+                          https://praxis-api-kjrf.onrender.com/images/933e65fe78b096f07ac7fa60caf07d13
                       name:
                         type: string
                         example: Product 2
@@ -26135,12 +26133,12 @@ paths:
                         items:
                           type: string
                           example: >-
-                            http://localhost:8000/images/1983c8803bb472811a674635b40e2cdf
+                            https://praxis-api-kjrf.onrender.com/images/1983c8803bb472811a674635b40e2cdf
                         example:
                           - >-
-                            http://localhost:8000/images/1983c8803bb472811a674635b40e2cdf
+                            https://praxis-api-kjrf.onrender.com/images/1983c8803bb472811a674635b40e2cdf
                           - >-
-                            http://localhost:8000/images/3422ec41808129eb1329ddb11f289690
+                            https://praxis-api-kjrf.onrender.com/images/3422ec41808129eb1329ddb11f289690
                       updatedAt:
                         type: string
                         example: '2023-06-03T19:54:12.026Z'
@@ -26163,16 +26161,16 @@ paths:
                       createdAt: '2023-06-03T19:54:12.026Z'
                       description: Product 2 description a long descriptio2
                       mainImage: >-
-                        http://localhost:8000/images/933e65fe78b096f07ac7fa60caf07d13
+                        https://praxis-api-kjrf.onrender.com/images/933e65fe78b096f07ac7fa60caf07d13
                       name: Product 2
                       owner: 647b8582f3c8e42f3200d26a
                       price: 4000
                       stock: 10
                       subImages:
                         - >-
-                          http://localhost:8000/images/1983c8803bb472811a674635b40e2cdf
+                          https://praxis-api-kjrf.onrender.com/images/1983c8803bb472811a674635b40e2cdf
                         - >-
-                          http://localhost:8000/images/3422ec41808129eb1329ddb11f289690
+                          https://praxis-api-kjrf.onrender.com/images/3422ec41808129eb1329ddb11f289690
                       updatedAt: '2023-06-03T19:54:12.026Z'
                     message: Product created successfully
                     statusCode: 201
@@ -26463,7 +26461,7 @@ paths:
                           mainImage:
                             type: string
                             example: >-
-                              http://localhost:8000/images/3158bbdac41c02430fb7a7361349762e
+                              https://praxis-api-kjrf.onrender.com/images/3158bbdac41c02430fb7a7361349762e
                           name:
                             type: string
                             example: Product 2
@@ -26481,10 +26479,10 @@ paths:
                             items:
                               type: string
                               example: >-
-                                http://localhost:8000/images/9ee446c55af4e936efa9c4dc3e70cd80
+                                https://praxis-api-kjrf.onrender.com/images/9ee446c55af4e936efa9c4dc3e70cd80
                             example:
                               - >-
-                                http://localhost:8000/images/9ee446c55af4e936efa9c4dc3e70cd80
+                                https://praxis-api-kjrf.onrender.com/images/9ee446c55af4e936efa9c4dc3e70cd80
                           updatedAt:
                             type: string
                             example: '2023-06-03T20:14:17.757Z'
@@ -26508,14 +26506,14 @@ paths:
                         createdAt: '2023-06-03T20:14:17.757Z'
                         description: Product 2 description a long descriptio2
                         mainImage: >-
-                          http://localhost:8000/images/3158bbdac41c02430fb7a7361349762e
+                          https://praxis-api-kjrf.onrender.com/images/3158bbdac41c02430fb7a7361349762e
                         name: Product 2
                         owner: 647b8582f3c8e42f3200d26a
                         price: 4000
                         stock: 20
                         subImages:
                           - >-
-                            http://localhost:8000/images/9ee446c55af4e936efa9c4dc3e70cd80
+                            https://praxis-api-kjrf.onrender.com/images/9ee446c55af4e936efa9c4dc3e70cd80
                         updatedAt: '2023-06-03T20:14:17.757Z'
                     message: Product deleted successfully
                     statusCode: 200
@@ -26645,7 +26643,7 @@ paths:
                           url:
                             type: string
                             example: >-
-                              http://localhost:8000/images/cover_image.png-168587416443763118173.png
+                              https://praxis-api-kjrf.onrender.com/images/cover_image.png-168587416443763118173.png
                       name:
                         type: string
                         example: Updated
@@ -26673,26 +26671,26 @@ paths:
                             url:
                               type: string
                               example: >-
-                                http://localhost:8000/images/splash-1splash.png-1685873218943.png
+                                https://praxis-api-kjrf.onrender.com/images/splash-1splash.png-1685873218943.png
                         example:
                           - _id: 647c624209e864c63841e348
                             localPath: public/images/splash-1splash.png-1685873218943.png
                             url: >-
-                              http://localhost:8000/images/splash-1splash.png-1685873218943.png
+                              https://praxis-api-kjrf.onrender.com/images/splash-1splash.png-1685873218943.png
                           - _id: 647c624209e864c63841e349
                             localPath: >-
                               public/images/Rectangle-1splash.png-1685873218945.png
                             url: >-
-                              http://localhost:8000/images/Rectangle-1splash.png-1685873218945.png
+                              https://praxis-api-kjrf.onrender.com/images/Rectangle-1splash.png-1685873218945.png
                           - _id: 647c624709e864c63841e354
                             localPath: public/images/splash-1splash.png-1685873223567.png
                             url: >-
-                              http://localhost:8000/images/splash-1splash.png-1685873223567.png
+                              https://praxis-api-kjrf.onrender.com/images/splash-1splash.png-1685873223567.png
                           - _id: 647c624709e864c63841e355
                             localPath: >-
                               public/images/Rectangle-1splash.png-1685873223568.png
                             url: >-
-                              http://localhost:8000/images/Rectangle-1splash.png-1685873223568.png
+                              https://praxis-api-kjrf.onrender.com/images/Rectangle-1splash.png-1685873223568.png
                       updatedAt:
                         type: string
                         example: '2023-06-04T10:22:44.459Z'
@@ -26719,7 +26717,7 @@ paths:
                         localPath: >-
                           public/images/cover_image.png-168587416443763118173.png
                         url: >-
-                          http://localhost:8000/images/cover_image.png-168587416443763118173.png
+                          https://praxis-api-kjrf.onrender.com/images/cover_image.png-168587416443763118173.png
                       name: Updated
                       owner: 647c5d68a1ce9c25a8033233
                       price: 1234
@@ -26728,21 +26726,21 @@ paths:
                         - _id: 647c624209e864c63841e348
                           localPath: public/images/splash-1splash.png-1685873218943.png
                           url: >-
-                            http://localhost:8000/images/splash-1splash.png-1685873218943.png
+                            https://praxis-api-kjrf.onrender.com/images/splash-1splash.png-1685873218943.png
                         - _id: 647c624209e864c63841e349
                           localPath: >-
                             public/images/Rectangle-1splash.png-1685873218945.png
                           url: >-
-                            http://localhost:8000/images/Rectangle-1splash.png-1685873218945.png
+                            https://praxis-api-kjrf.onrender.com/images/Rectangle-1splash.png-1685873218945.png
                         - _id: 647c624709e864c63841e354
                           localPath: public/images/splash-1splash.png-1685873223567.png
                           url: >-
-                            http://localhost:8000/images/splash-1splash.png-1685873223567.png
+                            https://praxis-api-kjrf.onrender.com/images/splash-1splash.png-1685873223567.png
                         - _id: 647c624709e864c63841e355
                           localPath: >-
                             public/images/Rectangle-1splash.png-1685873223568.png
                           url: >-
-                            http://localhost:8000/images/Rectangle-1splash.png-1685873223568.png
+                            https://praxis-api-kjrf.onrender.com/images/Rectangle-1splash.png-1685873223568.png
                       updatedAt: '2023-06-04T10:22:44.459Z'
                     message: Product updated successfully
                     statusCode: 200
@@ -27364,7 +27362,7 @@ paths:
                           url:
                             type: string
                             example: >-
-                              http://localhost:8000/images/cover_image.png-168587416443763118173.png
+                              https://praxis-api-kjrf.onrender.com/images/cover_image.png-168587416443763118173.png
                       name:
                         type: string
                         example: Updated
@@ -27407,7 +27405,7 @@ paths:
                         localPath: >-
                           public/images/cover_image.png-168587416443763118173.png
                         url: >-
-                          http://localhost:8000/images/cover_image.png-168587416443763118173.png
+                          https://praxis-api-kjrf.onrender.com/images/cover_image.png-168587416443763118173.png
                       name: Updated
                       owner: 647c5d68a1ce9c25a8033233
                       price: 1234
@@ -28312,7 +28310,7 @@ paths:
                                 url:
                                   type: string
                                   example: >-
-                                    http://localhost:8000/images/rectangle-1splash.png-168587595995075960680.png
+                                    https://praxis-api-kjrf.onrender.com/images/rectangle-1splash.png-168587595995075960680.png
                             name:
                               type: string
                               example: Women Product 1
@@ -28335,7 +28333,7 @@ paths:
                             localPath: >-
                               public/images/rectangle-1splash.png-168587595995075960680.png
                             url: >-
-                              http://localhost:8000/images/rectangle-1splash.png-168587595995075960680.png
+                              https://praxis-api-kjrf.onrender.com/images/rectangle-1splash.png-168587595995075960680.png
                           name: Women Product 1
                           price: 5000
                           stock: 100
@@ -28362,7 +28360,7 @@ paths:
                             localPath: >-
                               public/images/rectangle-1splash.png-168587595995075960680.png
                             url: >-
-                              http://localhost:8000/images/rectangle-1splash.png-168587595995075960680.png
+                              https://praxis-api-kjrf.onrender.com/images/rectangle-1splash.png-168587595995075960680.png
                           name: Women Product 1
                           price: 5000
                           stock: 100
@@ -30984,7 +30982,7 @@ paths:
                                     url:
                                       type: string
                                       example: >-
-                                        http://localhost:8000/images/christmas_card.png-168668153030924254640.png
+                                        https://praxis-api-kjrf.onrender.com/images/christmas_card.png-168668153030924254640.png
                                 name:
                                   type: string
                                   example: Kids product
@@ -31012,13 +31010,13 @@ paths:
                                       url:
                                         type: string
                                         example: >-
-                                          http://localhost:8000/images/diagram-export-05_06_2023,-17_10_50.png-168668153031198888310.png
+                                          https://praxis-api-kjrf.onrender.com/images/diagram-export-05_06_2023,-17_10_50.png-168668153031198888310.png
                                   example:
                                     - _id: 6488b7ba0023c81cf454a131
                                       localPath: >-
                                         public/images/diagram-export-05_06_2023,-17_10_50.png-168668153031198888310.png
                                       url: >-
-                                        http://localhost:8000/images/diagram-export-05_06_2023,-17_10_50.png-168668153031198888310.png
+                                        https://praxis-api-kjrf.onrender.com/images/diagram-export-05_06_2023,-17_10_50.png-168668153031198888310.png
                                 updatedAt:
                                   type: string
                                   example: '2023-06-13T19:19:17.437Z'
@@ -31039,7 +31037,7 @@ paths:
                                 localPath: >-
                                   public/images/christmas_card.png-168668153030924254640.png
                                 url: >-
-                                  http://localhost:8000/images/christmas_card.png-168668153030924254640.png
+                                  https://praxis-api-kjrf.onrender.com/images/christmas_card.png-168668153030924254640.png
                               name: Kids product
                               owner: 6488b7790023c81cf454a115
                               price: 230
@@ -31049,7 +31047,7 @@ paths:
                                   localPath: >-
                                     public/images/diagram-export-05_06_2023,-17_10_50.png-168668153031198888310.png
                                   url: >-
-                                    http://localhost:8000/images/diagram-export-05_06_2023,-17_10_50.png-168668153031198888310.png
+                                    https://praxis-api-kjrf.onrender.com/images/diagram-export-05_06_2023,-17_10_50.png-168668153031198888310.png
                               updatedAt: '2023-06-13T19:19:17.437Z'
                             quantity: 22
                   message:
@@ -31082,7 +31080,7 @@ paths:
                               localPath: >-
                                 public/images/christmas_card.png-168668153030924254640.png
                               url: >-
-                                http://localhost:8000/images/christmas_card.png-168668153030924254640.png
+                                https://praxis-api-kjrf.onrender.com/images/christmas_card.png-168668153030924254640.png
                             name: Kids product
                             owner: 6488b7790023c81cf454a115
                             price: 230
@@ -31092,7 +31090,7 @@ paths:
                                 localPath: >-
                                   public/images/diagram-export-05_06_2023,-17_10_50.png-168668153031198888310.png
                                 url: >-
-                                  http://localhost:8000/images/diagram-export-05_06_2023,-17_10_50.png-168668153031198888310.png
+                                  https://praxis-api-kjrf.onrender.com/images/diagram-export-05_06_2023,-17_10_50.png-168668153031198888310.png
                             updatedAt: '2023-06-13T19:19:17.437Z'
                           quantity: 22
                     message: Coupon removed successfully
@@ -35251,7 +35249,7 @@ paths:
                             url:
                               type: string
                               example: >-
-                                http://localhost:8000/images/bottle.jpg-168728294397895743007.jpg
+                                https://praxis-api-kjrf.onrender.com/images/bottle.jpg-168728294397895743007.jpg
                         createdAt:
                           type: string
                           example: '2023-06-20T17:26:09.021Z'
@@ -35296,7 +35294,7 @@ paths:
                           _id: 6491e500e7459f659f3fe8a8
                           localPath: public/images/bottle.jpg-168728294397895743007.jpg
                           url: >-
-                            http://localhost:8000/images/bottle.jpg-168728294397895743007.jpg
+                            https://praxis-api-kjrf.onrender.com/images/bottle.jpg-168728294397895743007.jpg
                         createdAt: '2023-06-20T17:26:09.021Z'
                         dob: '2023-06-20T17:25:24.365Z'
                         firstName: John
@@ -35337,7 +35335,7 @@ paths:
                           _id: 6491e500e7459f659f3fe8a8
                           localPath: public/images/bottle.jpg-168728294397895743007.jpg
                           url: >-
-                            http://localhost:8000/images/bottle.jpg-168728294397895743007.jpg
+                            https://praxis-api-kjrf.onrender.com/images/bottle.jpg-168728294397895743007.jpg
                         createdAt: '2023-06-20T17:26:09.021Z'
                         dob: '2023-06-20T17:25:24.365Z'
                         firstName: John
@@ -35694,7 +35692,7 @@ paths:
                             url:
                               type: string
                               example: >-
-                                http://localhost:8000/images/bottle.jpg-168728294397895743007.jpg
+                                https://praxis-api-kjrf.onrender.com/images/bottle.jpg-168728294397895743007.jpg
                         createdAt:
                           type: string
                           example: '2023-06-20T17:26:09.021Z'
@@ -35739,7 +35737,7 @@ paths:
                           _id: 6491e500e7459f659f3fe8a8
                           localPath: public/images/bottle.jpg-168728294397895743007.jpg
                           url: >-
-                            http://localhost:8000/images/bottle.jpg-168728294397895743007.jpg
+                            https://praxis-api-kjrf.onrender.com/images/bottle.jpg-168728294397895743007.jpg
                         createdAt: '2023-06-20T17:26:09.021Z'
                         dob: '2023-06-20T17:25:24.365Z'
                         firstName: John
@@ -35780,7 +35778,7 @@ paths:
                           _id: 6491e500e7459f659f3fe8a8
                           localPath: public/images/bottle.jpg-168728294397895743007.jpg
                           url: >-
-                            http://localhost:8000/images/bottle.jpg-168728294397895743007.jpg
+                            https://praxis-api-kjrf.onrender.com/images/bottle.jpg-168728294397895743007.jpg
                         createdAt: '2023-06-20T17:26:09.021Z'
                         dob: '2023-06-20T17:25:24.365Z'
                         firstName: John
@@ -37797,20 +37795,20 @@ paths:
                             url:
                               type: string
                               example: >-
-                                http://localhost:8000/images/copper-wire168846226828285707.jpeg
+                                https://praxis-api-kjrf.onrender.com/images/copper-wire168846226828285707.jpeg
                         example:
                           - _id: 64a3e3bc9d02a1e3d365f06b
                             localPath: public/images/copper-wire168846226828285707.jpeg
                             url: >-
-                              http://localhost:8000/images/copper-wire168846226828285707.jpeg
+                              https://praxis-api-kjrf.onrender.com/images/copper-wire168846226828285707.jpeg
                           - _id: 64a3e3bc9d02a1e3d365f06c
                             localPath: public/images/bottle168846226828566137.jpg
                             url: >-
-                              http://localhost:8000/images/bottle168846226828566137.jpg
+                              https://praxis-api-kjrf.onrender.com/images/bottle168846226828566137.jpg
                           - _id: 64a3e3bc9d02a1e3d365f06d
                             localPath: public/images/wood168846226851984630.jpeg
                             url: >-
-                              http://localhost:8000/images/wood168846226851984630.jpeg
+                              https://praxis-api-kjrf.onrender.com/images/wood168846226851984630.jpeg
                       isBookmarked:
                         type: boolean
                         example: false
@@ -37889,15 +37887,15 @@ paths:
                         - _id: 64a3e3bc9d02a1e3d365f06b
                           localPath: public/images/copper-wire168846226828285707.jpeg
                           url: >-
-                            http://localhost:8000/images/copper-wire168846226828285707.jpeg
+                            https://praxis-api-kjrf.onrender.com/images/copper-wire168846226828285707.jpeg
                         - _id: 64a3e3bc9d02a1e3d365f06c
                           localPath: public/images/bottle168846226828566137.jpg
                           url: >-
-                            http://localhost:8000/images/bottle168846226828566137.jpg
+                            https://praxis-api-kjrf.onrender.com/images/bottle168846226828566137.jpg
                         - _id: 64a3e3bc9d02a1e3d365f06d
                           localPath: public/images/wood168846226851984630.jpeg
                           url: >-
-                            http://localhost:8000/images/wood168846226851984630.jpeg
+                            https://praxis-api-kjrf.onrender.com/images/wood168846226851984630.jpeg
                       isBookmarked: false
                       isLiked: false
                       likes: 0
@@ -38513,24 +38511,24 @@ paths:
                             url:
                               type: string
                               example: >-
-                                http://localhost:8000/images/copper-wire168846226828285707.jpeg
+                                https://praxis-api-kjrf.onrender.com/images/copper-wire168846226828285707.jpeg
                         example:
                           - _id: 64a3e3bc9d02a1e3d365f06b
                             localPath: public/images/copper-wire168846226828285707.jpeg
                             url: >-
-                              http://localhost:8000/images/copper-wire168846226828285707.jpeg
+                              https://praxis-api-kjrf.onrender.com/images/copper-wire168846226828285707.jpeg
                           - _id: 64a3e3bc9d02a1e3d365f06c
                             localPath: public/images/bottle168846226828566137.jpg
                             url: >-
-                              http://localhost:8000/images/bottle168846226828566137.jpg
+                              https://praxis-api-kjrf.onrender.com/images/bottle168846226828566137.jpg
                           - _id: 64a3e3bc9d02a1e3d365f06d
                             localPath: public/images/wood168846226851984630.jpeg
                             url: >-
-                              http://localhost:8000/images/wood168846226851984630.jpeg
+                              https://praxis-api-kjrf.onrender.com/images/wood168846226851984630.jpeg
                           - _id: 64a3e45c9d02a1e3d365f08d
                             localPath: public/images/plastic168846242818670457.jpeg
                             url: >-
-                              http://localhost:8000/images/plastic168846242818670457.jpeg
+                              https://praxis-api-kjrf.onrender.com/images/plastic168846242818670457.jpeg
                       isBookmarked:
                         type: boolean
                         example: false
@@ -38605,19 +38603,19 @@ paths:
                         - _id: 64a3e3bc9d02a1e3d365f06b
                           localPath: public/images/copper-wire168846226828285707.jpeg
                           url: >-
-                            http://localhost:8000/images/copper-wire168846226828285707.jpeg
+                            https://praxis-api-kjrf.onrender.com/images/copper-wire168846226828285707.jpeg
                         - _id: 64a3e3bc9d02a1e3d365f06c
                           localPath: public/images/bottle168846226828566137.jpg
                           url: >-
-                            http://localhost:8000/images/bottle168846226828566137.jpg
+                            https://praxis-api-kjrf.onrender.com/images/bottle168846226828566137.jpg
                         - _id: 64a3e3bc9d02a1e3d365f06d
                           localPath: public/images/wood168846226851984630.jpeg
                           url: >-
-                            http://localhost:8000/images/wood168846226851984630.jpeg
+                            https://praxis-api-kjrf.onrender.com/images/wood168846226851984630.jpeg
                         - _id: 64a3e45c9d02a1e3d365f08d
                           localPath: public/images/plastic168846242818670457.jpeg
                           url: >-
-                            http://localhost:8000/images/plastic168846242818670457.jpeg
+                            https://praxis-api-kjrf.onrender.com/images/plastic168846242818670457.jpeg
                       isBookmarked: false
                       isLiked: false
                       likes: 0
@@ -40872,20 +40870,20 @@ paths:
                             url:
                               type: string
                               example: >-
-                                http://localhost:8000/images/copper-wire168846226828285707.jpeg
+                                https://praxis-api-kjrf.onrender.com/images/copper-wire168846226828285707.jpeg
                         example:
                           - _id: 64a3e3bc9d02a1e3d365f06b
                             localPath: public/images/copper-wire168846226828285707.jpeg
                             url: >-
-                              http://localhost:8000/images/copper-wire168846226828285707.jpeg
+                              https://praxis-api-kjrf.onrender.com/images/copper-wire168846226828285707.jpeg
                           - _id: 64a3e3bc9d02a1e3d365f06c
                             localPath: public/images/bottle168846226828566137.jpg
                             url: >-
-                              http://localhost:8000/images/bottle168846226828566137.jpg
+                              https://praxis-api-kjrf.onrender.com/images/bottle168846226828566137.jpg
                           - _id: 64a3e3bc9d02a1e3d365f06d
                             localPath: public/images/wood168846226851984630.jpeg
                             url: >-
-                              http://localhost:8000/images/wood168846226851984630.jpeg
+                              https://praxis-api-kjrf.onrender.com/images/wood168846226851984630.jpeg
                       isBookmarked:
                         type: boolean
                         example: false
@@ -40967,15 +40965,15 @@ paths:
                         - _id: 64a3e3bc9d02a1e3d365f06b
                           localPath: public/images/copper-wire168846226828285707.jpeg
                           url: >-
-                            http://localhost:8000/images/copper-wire168846226828285707.jpeg
+                            https://praxis-api-kjrf.onrender.com/images/copper-wire168846226828285707.jpeg
                         - _id: 64a3e3bc9d02a1e3d365f06c
                           localPath: public/images/bottle168846226828566137.jpg
                           url: >-
-                            http://localhost:8000/images/bottle168846226828566137.jpg
+                            https://praxis-api-kjrf.onrender.com/images/bottle168846226828566137.jpg
                         - _id: 64a3e3bc9d02a1e3d365f06d
                           localPath: public/images/wood168846226851984630.jpeg
                           url: >-
-                            http://localhost:8000/images/wood168846226851984630.jpeg
+                            https://praxis-api-kjrf.onrender.com/images/wood168846226851984630.jpeg
                       isBookmarked: false
                       isLiked: false
                       likes: 0
@@ -48862,13 +48860,13 @@ paths:
                                 url:
                                   type: string
                                   example: >-
-                                    http://localhost:8000/images/apple-fruit169238918631069806.jpg
+                                    https://praxis-api-kjrf.onrender.com/images/apple-fruit169238918631069806.jpg
                             example:
                               - _id: 64dfcf4239dd3fa3cade508d
                                 localPath: >-
                                   public/images/apple-fruit169238918631069806.jpg
                                 url: >-
-                                  http://localhost:8000/images/apple-fruit169238918631069806.jpg
+                                  https://praxis-api-kjrf.onrender.com/images/apple-fruit169238918631069806.jpg
                           chat:
                             type: string
                             example: 64dfc9f439dd3fa3cade4f3c
@@ -49095,7 +49093,7 @@ paths:
                           - _id: 64dfcf4239dd3fa3cade508d
                             localPath: public/images/apple-fruit169238918631069806.jpg
                             url: >-
-                              http://localhost:8000/images/apple-fruit169238918631069806.jpg
+                              https://praxis-api-kjrf.onrender.com/images/apple-fruit169238918631069806.jpg
                         chat: 64dfc9f439dd3fa3cade4f3c
                         content: ''
                         createdAt: '2023-08-18T20:06:26.382Z'
@@ -49345,20 +49343,20 @@ paths:
                               url:
                                 type: string
                                 example: >-
-                                  http://localhost:8000/images/apple-fruit169124599101990191.jpg
+                                  https://praxis-api-kjrf.onrender.com/images/apple-fruit169124599101990191.jpg
                           example:
                             - _id: 64ce5da74c05d878da37e980
                               localPath: public/images/apple-fruit169124599101990191.jpg
                               url: >-
-                                http://localhost:8000/images/apple-fruit169124599101990191.jpg
+                                https://praxis-api-kjrf.onrender.com/images/apple-fruit169124599101990191.jpg
                             - _id: 64ce5da74c05d878da37e981
                               localPath: public/images/phone169124599104713451.jpeg
                               url: >-
-                                http://localhost:8000/images/phone169124599104713451.jpeg
+                                https://praxis-api-kjrf.onrender.com/images/phone169124599104713451.jpeg
                             - _id: 64ce5da74c05d878da37e982
                               localPath: public/images/tire169124599107735823.jpeg
                               url: >-
-                                http://localhost:8000/images/tire169124599107735823.jpeg
+                                https://praxis-api-kjrf.onrender.com/images/tire169124599107735823.jpeg
                         sender:
                           type: object
                           properties:
@@ -49378,7 +49376,7 @@ paths:
                                 url:
                                   type: string
                                   example: >-
-                                    http://localhost:8000/images/apple-fruit169124589659630753.jpg
+                                    https://praxis-api-kjrf.onrender.com/images/apple-fruit169124589659630753.jpg
                             email:
                               type: string
                               example: rasheed6@yahoo.com
@@ -49398,22 +49396,22 @@ paths:
                           - _id: 64ce5da74c05d878da37e980
                             localPath: public/images/apple-fruit169124599101990191.jpg
                             url: >-
-                              http://localhost:8000/images/apple-fruit169124599101990191.jpg
+                              https://praxis-api-kjrf.onrender.com/images/apple-fruit169124599101990191.jpg
                           - _id: 64ce5da74c05d878da37e981
                             localPath: public/images/phone169124599104713451.jpeg
                             url: >-
-                              http://localhost:8000/images/phone169124599104713451.jpeg
+                              https://praxis-api-kjrf.onrender.com/images/phone169124599104713451.jpeg
                           - _id: 64ce5da74c05d878da37e982
                             localPath: public/images/tire169124599107735823.jpeg
                             url: >-
-                              http://localhost:8000/images/tire169124599107735823.jpeg
+                              https://praxis-api-kjrf.onrender.com/images/tire169124599107735823.jpeg
                         sender:
                           _id: 64cc9951ea416ef275f0210f
                           avatar:
                             _id: 64ce5d481eb1fda995b9ed51
                             localPath: public/images/apple-fruit169124589659630753.jpg
                             url: >-
-                              http://localhost:8000/images/apple-fruit169124589659630753.jpg
+                              https://praxis-api-kjrf.onrender.com/images/apple-fruit169124589659630753.jpg
                           email: rasheed6@yahoo.com
                           username: darrion_waelchi
                         updatedAt: '2023-08-05T14:33:11.125Z'
@@ -49429,7 +49427,7 @@ paths:
                             _id: 64ce5d481eb1fda995b9ed51
                             localPath: public/images/apple-fruit169124589659630753.jpg
                             url: >-
-                              http://localhost:8000/images/apple-fruit169124589659630753.jpg
+                              https://praxis-api-kjrf.onrender.com/images/apple-fruit169124589659630753.jpg
                           email: rasheed6@yahoo.com
                           username: darrion_waelchi
                         updatedAt: '2023-08-05T14:28:34.359Z'
@@ -49445,7 +49443,7 @@ paths:
                             _id: 64ce5d481eb1fda995b9ed51
                             localPath: public/images/apple-fruit169124589659630753.jpg
                             url: >-
-                              http://localhost:8000/images/apple-fruit169124589659630753.jpg
+                              https://praxis-api-kjrf.onrender.com/images/apple-fruit169124589659630753.jpg
                           email: rasheed6@yahoo.com
                           username: darrion_waelchi
                         updatedAt: '2023-08-05T14:26:01.752Z'
@@ -49475,7 +49473,7 @@ paths:
                             _id: 64ce5d481eb1fda995b9ed51
                             localPath: public/images/apple-fruit169124589659630753.jpg
                             url: >-
-                              http://localhost:8000/images/apple-fruit169124589659630753.jpg
+                              https://praxis-api-kjrf.onrender.com/images/apple-fruit169124589659630753.jpg
                           email: rasheed6@yahoo.com
                           username: darrion_waelchi
                         updatedAt: '2023-08-04T17:56:38.790Z'
@@ -49490,7 +49488,7 @@ paths:
                             _id: 64ce5d481eb1fda995b9ed51
                             localPath: public/images/apple-fruit169124589659630753.jpg
                             url: >-
-                              http://localhost:8000/images/apple-fruit169124589659630753.jpg
+                              https://praxis-api-kjrf.onrender.com/images/apple-fruit169124589659630753.jpg
                           email: rasheed6@yahoo.com
                           username: darrion_waelchi
                         updatedAt: '2023-08-04T17:53:29.993Z'
@@ -49505,7 +49503,7 @@ paths:
                             _id: 64ce5d481eb1fda995b9ed51
                             localPath: public/images/apple-fruit169124589659630753.jpg
                             url: >-
-                              http://localhost:8000/images/apple-fruit169124589659630753.jpg
+                              https://praxis-api-kjrf.onrender.com/images/apple-fruit169124589659630753.jpg
                           email: rasheed6@yahoo.com
                           username: darrion_waelchi
                         updatedAt: '2023-08-04T17:19:13.635Z'
@@ -49520,7 +49518,7 @@ paths:
                             _id: 64ce5d481eb1fda995b9ed51
                             localPath: public/images/apple-fruit169124589659630753.jpg
                             url: >-
-                              http://localhost:8000/images/apple-fruit169124589659630753.jpg
+                              https://praxis-api-kjrf.onrender.com/images/apple-fruit169124589659630753.jpg
                           email: rasheed6@yahoo.com
                           username: darrion_waelchi
                         updatedAt: '2023-08-04T17:17:02.822Z'
@@ -49535,7 +49533,7 @@ paths:
                             _id: 64ce5d481eb1fda995b9ed51
                             localPath: public/images/apple-fruit169124589659630753.jpg
                             url: >-
-                              http://localhost:8000/images/apple-fruit169124589659630753.jpg
+                              https://praxis-api-kjrf.onrender.com/images/apple-fruit169124589659630753.jpg
                           email: rasheed6@yahoo.com
                           username: darrion_waelchi
                         updatedAt: '2023-08-04T16:42:18.925Z'
@@ -49550,7 +49548,7 @@ paths:
                             _id: 64ce5d481eb1fda995b9ed51
                             localPath: public/images/apple-fruit169124589659630753.jpg
                             url: >-
-                              http://localhost:8000/images/apple-fruit169124589659630753.jpg
+                              https://praxis-api-kjrf.onrender.com/images/apple-fruit169124589659630753.jpg
                           email: rasheed6@yahoo.com
                           username: darrion_waelchi
                         updatedAt: '2023-08-04T15:48:09.715Z'
@@ -49610,7 +49608,7 @@ paths:
                             _id: 64ce5d481eb1fda995b9ed51
                             localPath: public/images/apple-fruit169124589659630753.jpg
                             url: >-
-                              http://localhost:8000/images/apple-fruit169124589659630753.jpg
+                              https://praxis-api-kjrf.onrender.com/images/apple-fruit169124589659630753.jpg
                           email: rasheed6@yahoo.com
                           username: darrion_waelchi
                         updatedAt: '2023-08-04T15:47:35.263Z'
@@ -49625,7 +49623,7 @@ paths:
                             _id: 64ce5d481eb1fda995b9ed51
                             localPath: public/images/apple-fruit169124589659630753.jpg
                             url: >-
-                              http://localhost:8000/images/apple-fruit169124589659630753.jpg
+                              https://praxis-api-kjrf.onrender.com/images/apple-fruit169124589659630753.jpg
                           email: rasheed6@yahoo.com
                           username: darrion_waelchi
                         updatedAt: '2023-08-04T15:47:30.491Z'
@@ -49640,7 +49638,7 @@ paths:
                             _id: 64ce5d481eb1fda995b9ed51
                             localPath: public/images/apple-fruit169124589659630753.jpg
                             url: >-
-                              http://localhost:8000/images/apple-fruit169124589659630753.jpg
+                              https://praxis-api-kjrf.onrender.com/images/apple-fruit169124589659630753.jpg
                           email: rasheed6@yahoo.com
                           username: darrion_waelchi
                         updatedAt: '2023-08-04T15:47:27.635Z'
@@ -49655,7 +49653,7 @@ paths:
                             _id: 64ce5d481eb1fda995b9ed51
                             localPath: public/images/apple-fruit169124589659630753.jpg
                             url: >-
-                              http://localhost:8000/images/apple-fruit169124589659630753.jpg
+                              https://praxis-api-kjrf.onrender.com/images/apple-fruit169124589659630753.jpg
                           email: rasheed6@yahoo.com
                           username: darrion_waelchi
                         updatedAt: '2023-08-04T15:47:22.325Z'
@@ -49685,7 +49683,7 @@ paths:
                             _id: 64ce5d481eb1fda995b9ed51
                             localPath: public/images/apple-fruit169124589659630753.jpg
                             url: >-
-                              http://localhost:8000/images/apple-fruit169124589659630753.jpg
+                              https://praxis-api-kjrf.onrender.com/images/apple-fruit169124589659630753.jpg
                           email: rasheed6@yahoo.com
                           username: darrion_waelchi
                         updatedAt: '2023-08-04T15:46:27.963Z'
@@ -49715,7 +49713,7 @@ paths:
                             _id: 64ce5d481eb1fda995b9ed51
                             localPath: public/images/apple-fruit169124589659630753.jpg
                             url: >-
-                              http://localhost:8000/images/apple-fruit169124589659630753.jpg
+                              https://praxis-api-kjrf.onrender.com/images/apple-fruit169124589659630753.jpg
                           email: rasheed6@yahoo.com
                           username: darrion_waelchi
                         updatedAt: '2023-08-04T14:58:34.375Z'
@@ -49745,7 +49743,7 @@ paths:
                             _id: 64ce5d481eb1fda995b9ed51
                             localPath: public/images/apple-fruit169124589659630753.jpg
                             url: >-
-                              http://localhost:8000/images/apple-fruit169124589659630753.jpg
+                              https://praxis-api-kjrf.onrender.com/images/apple-fruit169124589659630753.jpg
                           email: rasheed6@yahoo.com
                           username: darrion_waelchi
                         updatedAt: '2023-08-04T14:58:14.080Z'
@@ -49760,7 +49758,7 @@ paths:
                             _id: 64ce5d481eb1fda995b9ed51
                             localPath: public/images/apple-fruit169124589659630753.jpg
                             url: >-
-                              http://localhost:8000/images/apple-fruit169124589659630753.jpg
+                              https://praxis-api-kjrf.onrender.com/images/apple-fruit169124589659630753.jpg
                           email: rasheed6@yahoo.com
                           username: darrion_waelchi
                         updatedAt: '2023-08-04T12:25:19.735Z'
@@ -49786,22 +49784,22 @@ paths:
                           - _id: 64ce5da74c05d878da37e980
                             localPath: public/images/apple-fruit169124599101990191.jpg
                             url: >-
-                              http://localhost:8000/images/apple-fruit169124599101990191.jpg
+                              https://praxis-api-kjrf.onrender.com/images/apple-fruit169124599101990191.jpg
                           - _id: 64ce5da74c05d878da37e981
                             localPath: public/images/phone169124599104713451.jpeg
                             url: >-
-                              http://localhost:8000/images/phone169124599104713451.jpeg
+                              https://praxis-api-kjrf.onrender.com/images/phone169124599104713451.jpeg
                           - _id: 64ce5da74c05d878da37e982
                             localPath: public/images/tire169124599107735823.jpeg
                             url: >-
-                              http://localhost:8000/images/tire169124599107735823.jpeg
+                              https://praxis-api-kjrf.onrender.com/images/tire169124599107735823.jpeg
                         sender:
                           _id: 64cc9951ea416ef275f0210f
                           avatar:
                             _id: 64ce5d481eb1fda995b9ed51
                             localPath: public/images/apple-fruit169124589659630753.jpg
                             url: >-
-                              http://localhost:8000/images/apple-fruit169124589659630753.jpg
+                              https://praxis-api-kjrf.onrender.com/images/apple-fruit169124589659630753.jpg
                           email: rasheed6@yahoo.com
                           username: darrion_waelchi
                         updatedAt: '2023-08-05T14:33:11.125Z'
@@ -49817,7 +49815,7 @@ paths:
                             _id: 64ce5d481eb1fda995b9ed51
                             localPath: public/images/apple-fruit169124589659630753.jpg
                             url: >-
-                              http://localhost:8000/images/apple-fruit169124589659630753.jpg
+                              https://praxis-api-kjrf.onrender.com/images/apple-fruit169124589659630753.jpg
                           email: rasheed6@yahoo.com
                           username: darrion_waelchi
                         updatedAt: '2023-08-05T14:28:34.359Z'
@@ -49833,7 +49831,7 @@ paths:
                             _id: 64ce5d481eb1fda995b9ed51
                             localPath: public/images/apple-fruit169124589659630753.jpg
                             url: >-
-                              http://localhost:8000/images/apple-fruit169124589659630753.jpg
+                              https://praxis-api-kjrf.onrender.com/images/apple-fruit169124589659630753.jpg
                           email: rasheed6@yahoo.com
                           username: darrion_waelchi
                         updatedAt: '2023-08-05T14:26:01.752Z'
@@ -49863,7 +49861,7 @@ paths:
                             _id: 64ce5d481eb1fda995b9ed51
                             localPath: public/images/apple-fruit169124589659630753.jpg
                             url: >-
-                              http://localhost:8000/images/apple-fruit169124589659630753.jpg
+                              https://praxis-api-kjrf.onrender.com/images/apple-fruit169124589659630753.jpg
                           email: rasheed6@yahoo.com
                           username: darrion_waelchi
                         updatedAt: '2023-08-04T17:56:38.790Z'
@@ -49878,7 +49876,7 @@ paths:
                             _id: 64ce5d481eb1fda995b9ed51
                             localPath: public/images/apple-fruit169124589659630753.jpg
                             url: >-
-                              http://localhost:8000/images/apple-fruit169124589659630753.jpg
+                              https://praxis-api-kjrf.onrender.com/images/apple-fruit169124589659630753.jpg
                           email: rasheed6@yahoo.com
                           username: darrion_waelchi
                         updatedAt: '2023-08-04T17:53:29.993Z'
@@ -49893,7 +49891,7 @@ paths:
                             _id: 64ce5d481eb1fda995b9ed51
                             localPath: public/images/apple-fruit169124589659630753.jpg
                             url: >-
-                              http://localhost:8000/images/apple-fruit169124589659630753.jpg
+                              https://praxis-api-kjrf.onrender.com/images/apple-fruit169124589659630753.jpg
                           email: rasheed6@yahoo.com
                           username: darrion_waelchi
                         updatedAt: '2023-08-04T17:19:13.635Z'
@@ -49908,7 +49906,7 @@ paths:
                             _id: 64ce5d481eb1fda995b9ed51
                             localPath: public/images/apple-fruit169124589659630753.jpg
                             url: >-
-                              http://localhost:8000/images/apple-fruit169124589659630753.jpg
+                              https://praxis-api-kjrf.onrender.com/images/apple-fruit169124589659630753.jpg
                           email: rasheed6@yahoo.com
                           username: darrion_waelchi
                         updatedAt: '2023-08-04T17:17:02.822Z'
@@ -49923,7 +49921,7 @@ paths:
                             _id: 64ce5d481eb1fda995b9ed51
                             localPath: public/images/apple-fruit169124589659630753.jpg
                             url: >-
-                              http://localhost:8000/images/apple-fruit169124589659630753.jpg
+                              https://praxis-api-kjrf.onrender.com/images/apple-fruit169124589659630753.jpg
                           email: rasheed6@yahoo.com
                           username: darrion_waelchi
                         updatedAt: '2023-08-04T16:42:18.925Z'
@@ -49938,7 +49936,7 @@ paths:
                             _id: 64ce5d481eb1fda995b9ed51
                             localPath: public/images/apple-fruit169124589659630753.jpg
                             url: >-
-                              http://localhost:8000/images/apple-fruit169124589659630753.jpg
+                              https://praxis-api-kjrf.onrender.com/images/apple-fruit169124589659630753.jpg
                           email: rasheed6@yahoo.com
                           username: darrion_waelchi
                         updatedAt: '2023-08-04T15:48:09.715Z'
@@ -49998,7 +49996,7 @@ paths:
                             _id: 64ce5d481eb1fda995b9ed51
                             localPath: public/images/apple-fruit169124589659630753.jpg
                             url: >-
-                              http://localhost:8000/images/apple-fruit169124589659630753.jpg
+                              https://praxis-api-kjrf.onrender.com/images/apple-fruit169124589659630753.jpg
                           email: rasheed6@yahoo.com
                           username: darrion_waelchi
                         updatedAt: '2023-08-04T15:47:35.263Z'
@@ -50013,7 +50011,7 @@ paths:
                             _id: 64ce5d481eb1fda995b9ed51
                             localPath: public/images/apple-fruit169124589659630753.jpg
                             url: >-
-                              http://localhost:8000/images/apple-fruit169124589659630753.jpg
+                              https://praxis-api-kjrf.onrender.com/images/apple-fruit169124589659630753.jpg
                           email: rasheed6@yahoo.com
                           username: darrion_waelchi
                         updatedAt: '2023-08-04T15:47:30.491Z'
@@ -50028,7 +50026,7 @@ paths:
                             _id: 64ce5d481eb1fda995b9ed51
                             localPath: public/images/apple-fruit169124589659630753.jpg
                             url: >-
-                              http://localhost:8000/images/apple-fruit169124589659630753.jpg
+                              https://praxis-api-kjrf.onrender.com/images/apple-fruit169124589659630753.jpg
                           email: rasheed6@yahoo.com
                           username: darrion_waelchi
                         updatedAt: '2023-08-04T15:47:27.635Z'
@@ -50043,7 +50041,7 @@ paths:
                             _id: 64ce5d481eb1fda995b9ed51
                             localPath: public/images/apple-fruit169124589659630753.jpg
                             url: >-
-                              http://localhost:8000/images/apple-fruit169124589659630753.jpg
+                              https://praxis-api-kjrf.onrender.com/images/apple-fruit169124589659630753.jpg
                           email: rasheed6@yahoo.com
                           username: darrion_waelchi
                         updatedAt: '2023-08-04T15:47:22.325Z'
@@ -50073,7 +50071,7 @@ paths:
                             _id: 64ce5d481eb1fda995b9ed51
                             localPath: public/images/apple-fruit169124589659630753.jpg
                             url: >-
-                              http://localhost:8000/images/apple-fruit169124589659630753.jpg
+                              https://praxis-api-kjrf.onrender.com/images/apple-fruit169124589659630753.jpg
                           email: rasheed6@yahoo.com
                           username: darrion_waelchi
                         updatedAt: '2023-08-04T15:46:27.963Z'
@@ -50103,7 +50101,7 @@ paths:
                             _id: 64ce5d481eb1fda995b9ed51
                             localPath: public/images/apple-fruit169124589659630753.jpg
                             url: >-
-                              http://localhost:8000/images/apple-fruit169124589659630753.jpg
+                              https://praxis-api-kjrf.onrender.com/images/apple-fruit169124589659630753.jpg
                           email: rasheed6@yahoo.com
                           username: darrion_waelchi
                         updatedAt: '2023-08-04T14:58:34.375Z'
@@ -50133,7 +50131,7 @@ paths:
                             _id: 64ce5d481eb1fda995b9ed51
                             localPath: public/images/apple-fruit169124589659630753.jpg
                             url: >-
-                              http://localhost:8000/images/apple-fruit169124589659630753.jpg
+                              https://praxis-api-kjrf.onrender.com/images/apple-fruit169124589659630753.jpg
                           email: rasheed6@yahoo.com
                           username: darrion_waelchi
                         updatedAt: '2023-08-04T14:58:14.080Z'
@@ -50148,7 +50146,7 @@ paths:
                             _id: 64ce5d481eb1fda995b9ed51
                             localPath: public/images/apple-fruit169124589659630753.jpg
                             url: >-
-                              http://localhost:8000/images/apple-fruit169124589659630753.jpg
+                              https://praxis-api-kjrf.onrender.com/images/apple-fruit169124589659630753.jpg
                           email: rasheed6@yahoo.com
                           username: darrion_waelchi
                         updatedAt: '2023-08-04T12:25:19.735Z'
@@ -50273,20 +50271,20 @@ paths:
                             url:
                               type: string
                               example: >-
-                                http://localhost:8000/images/apple-fruit169124599101990191.jpg
+                                https://praxis-api-kjrf.onrender.com/images/apple-fruit169124599101990191.jpg
                         example:
                           - _id: 64ce5da74c05d878da37e980
                             localPath: public/images/apple-fruit169124599101990191.jpg
                             url: >-
-                              http://localhost:8000/images/apple-fruit169124599101990191.jpg
+                              https://praxis-api-kjrf.onrender.com/images/apple-fruit169124599101990191.jpg
                           - _id: 64ce5da74c05d878da37e981
                             localPath: public/images/phone169124599104713451.jpeg
                             url: >-
-                              http://localhost:8000/images/phone169124599104713451.jpeg
+                              https://praxis-api-kjrf.onrender.com/images/phone169124599104713451.jpeg
                           - _id: 64ce5da74c05d878da37e982
                             localPath: public/images/tire169124599107735823.jpeg
                             url: >-
-                              http://localhost:8000/images/tire169124599107735823.jpeg
+                              https://praxis-api-kjrf.onrender.com/images/tire169124599107735823.jpeg
                       chat:
                         type: string
                         example: 64cce34ddb940e1dd6232a3f
@@ -50315,7 +50313,7 @@ paths:
                               url:
                                 type: string
                                 example: >-
-                                  http://localhost:8000/images/apple-fruit169124589659630753.jpg
+                                  https://praxis-api-kjrf.onrender.com/images/apple-fruit169124589659630753.jpg
                           email:
                             type: string
                             example: rasheed6@yahoo.com
@@ -50344,15 +50342,15 @@ paths:
                         - _id: 64ce5da74c05d878da37e980
                           localPath: public/images/apple-fruit169124599101990191.jpg
                           url: >-
-                            http://localhost:8000/images/apple-fruit169124599101990191.jpg
+                            https://praxis-api-kjrf.onrender.com/images/apple-fruit169124599101990191.jpg
                         - _id: 64ce5da74c05d878da37e981
                           localPath: public/images/phone169124599104713451.jpeg
                           url: >-
-                            http://localhost:8000/images/phone169124599104713451.jpeg
+                            https://praxis-api-kjrf.onrender.com/images/phone169124599104713451.jpeg
                         - _id: 64ce5da74c05d878da37e982
                           localPath: public/images/tire169124599107735823.jpeg
                           url: >-
-                            http://localhost:8000/images/tire169124599107735823.jpeg
+                            https://praxis-api-kjrf.onrender.com/images/tire169124599107735823.jpeg
                       chat: 64cce34ddb940e1dd6232a3f
                       content: This is the message
                       createdAt: '2023-08-05T14:33:11.125Z'
@@ -50362,7 +50360,7 @@ paths:
                           _id: 64ce5d481eb1fda995b9ed51
                           localPath: public/images/apple-fruit169124589659630753.jpg
                           url: >-
-                            http://localhost:8000/images/apple-fruit169124589659630753.jpg
+                            https://praxis-api-kjrf.onrender.com/images/apple-fruit169124589659630753.jpg
                         email: rasheed6@yahoo.com
                         username: darrion_waelchi
                       updatedAt: '2023-08-05T14:33:11.125Z'

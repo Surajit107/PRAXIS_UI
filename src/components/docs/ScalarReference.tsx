@@ -5,7 +5,7 @@ import "@scalar/api-reference-react/style.css";
 import { useEffect, useState } from "react";
 import { stripOpenApiEmojis } from "@/lib/docs/clean-openapi";
 import { useResolvedApiServerUrl } from "@/hooks/useResolvedApiUrls";
-import { getApiServerUrl, getScalarProxyUrl } from "@/lib/praxis";
+import { getScalarProxyUrl } from "@/lib/praxis";
 import { themeColors } from "@/lib/theme";
 
 const SPEC_URL =
@@ -13,13 +13,16 @@ const SPEC_URL =
 
 /** Force OpenAPI `servers.url` to the configured Praxis base (`…/api/v1`). */
 function withApiServerUrl(yaml: string, serverUrl: string): string {
-  if (/^servers:\s*\n\s*-\s*url:\s*.+$/m.test(yaml)) {
+  const serversBlock = /^servers:\s*\n(?:\s+-\s+url:\s*.+\n(?:\s+description:\s*.+\n)?)+/m;
+  const nextServers = `servers:\n  - url: ${serverUrl}\n    description: Praxis API\n`;
+
+  if (serversBlock.test(yaml)) {
     return yaml.replace(
-      /^servers:\s*\n\s*-\s*url:\s*.+$/m,
-      `servers:\n  - url: ${serverUrl}`,
+      serversBlock,
+      nextServers,
     );
   }
-  return `servers:\n  - url: ${serverUrl}\n${yaml}`;
+  return `${nextServers}${yaml}`;
 }
 
 export function ScalarReference() {
@@ -39,7 +42,7 @@ export function ScalarReference() {
         }
         const raw = await response.text();
         if (!cancelled) {
-          setSpec(withApiServerUrl(stripOpenApiEmojis(raw), getApiServerUrl()));
+          setSpec(withApiServerUrl(stripOpenApiEmojis(raw), serverUrl));
         }
       } catch (err) {
         if (!cancelled) {
@@ -52,7 +55,7 @@ export function ScalarReference() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [serverUrl]);
 
   if (error) {
     return (

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getApiProxyTarget } from "@/lib/praxis";
+import { getApiProxyTarget, getRequestOriginFromHeaders } from "@/config/praxis-api";
 
 export const dynamic = "force-dynamic";
 
@@ -21,7 +21,8 @@ const HOP_BY_HOP = new Set([
 ]);
 
 function buildUpstreamUrl(request: NextRequest, path: string[]): string {
-  const base = getApiProxyTarget();
+  const requestOrigin = getRequestOriginFromHeaders(request.headers);
+  const base = getApiProxyTarget({ requestOrigin });
   const suffix = path.map(encodeURIComponent).join("/");
   const search = request.nextUrl.search;
   return suffix ? `${base}/${suffix}${search}` : `${base}/${search}`;
@@ -61,7 +62,9 @@ async function proxy(request: NextRequest, context: RouteContext): Promise<Respo
       {
         error: "proxy_upstream_unreachable",
         message,
-        upstream: getApiProxyTarget(),
+        upstream: getApiProxyTarget({
+          requestOrigin: getRequestOriginFromHeaders(request.headers),
+        }),
         hint: "Start PRAXIS_API (default http://localhost:8000) or set PRAXIS_API_PROXY_TARGET. API routes are under /api/v1.",
       },
       { status: 502 },

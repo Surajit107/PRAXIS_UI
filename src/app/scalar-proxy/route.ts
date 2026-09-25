@@ -1,5 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { API_PATH_PROXY_PREFIX, getApiProxyTarget } from "@/lib/praxis";
+import {
+  getAllowedApiOrigins,
+  getApiProxyTarget,
+  getRequestOriginFromHeaders,
+  PRAXIS_API_BROWSER_PROXY_PATH,
+} from "@/config/praxis-api";
 
 export const dynamic = "force-dynamic";
 
@@ -16,27 +21,16 @@ const HOP_BY_HOP = new Set([
   "content-length",
 ]);
 
-function allowedUpstreamOrigins(): Set<string> {
-  const origins = new Set<string>();
-  try {
-    origins.add(new URL(getApiProxyTarget()).origin);
-  } catch {
-    origins.add("http://localhost:8000");
-  }
-  origins.add("http://127.0.0.1:8000");
-  return origins;
-}
-
 /**
  * Map UI path-proxy URLs back to the real API origin before the allowlist check.
  * Scalar must target the API host; this recovers if a build still advertised `/praxis-api`.
  */
-function resolveUpstream(target: URL): URL {
-  if (!target.pathname.startsWith(API_PATH_PROXY_PREFIX)) return target;
+function resolveUpstream(target: URL, requestOrigin: string | null): URL {
+  if (!target.pathname.startsWith(PRAXIS_API_BROWSER_PROXY_PATH)) return target;
 
-  const apiOrigin = getApiProxyTarget();
+  const apiOrigin = getApiProxyTarget({ requestOrigin });
   const stripped =
-    target.pathname.slice(API_PATH_PROXY_PREFIX.length) || "/";
+    target.pathname.slice(PRAXIS_API_BROWSER_PROXY_PATH.length) || "/";
   return new URL(`${stripped}${target.search}`, `${apiOrigin}/`);
 }
 
@@ -55,6 +49,7 @@ function filterRequestHeaders(source: Headers): Headers {
  * See @scalar/helpers redirectToProxy.
  */
 async function proxy(request: NextRequest): Promise<Response> {
+  const requestOrigin = getRequestOriginFromHeaders(request.headers);
   const scalarUrl = request.nextUrl.searchParams.get("scalar_url");
   if (!scalarUrl) {
     return NextResponse.json(
@@ -76,14 +71,15 @@ async function proxy(request: NextRequest): Promise<Response> {
     );
   }
 
-  const target = resolveUpstream(parsed);
+  const target = resolveUpstream(parsed, requestOrigin);
+  const allowedOrigins = new Set(getAllowedApiOrigins({ requestOrigin }));
 
-  if (!allowedUpstreamOrigins().has(target.origin)) {
+  if (!allowedOrigins.has(target.origin)) {
     return NextResponse.json(
       {
         error: "upstream_not_allowed",
         message: `Refusing to proxy to ${target.origin}`,
-        allowed: [...allowedUpstreamOrigins()],
+        allowed: [...allowedOrigins],
       },
       { status: 403 },
     );
@@ -108,7 +104,7 @@ async function proxy(request: NextRequest): Promise<Response> {
       {
         error: "proxy_upstream_unreachable",
         message,
-        upstream: getApiProxyTarget(),
+        upstream: getApiProxyTarget({ requestOrigin }),
         hint: "Start PRAXIS_API (default http://localhost:8000) or set PRAXIS_API_PROXY_TARGET. API routes are under /api/v1.",
       },
       { status: 502 },

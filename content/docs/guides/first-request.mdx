@@ -20,14 +20,14 @@ Query parameters: `page`, `limit` (strings in the OpenAPI schema — pass numeri
     {
       label: "cURL",
       language: "bash",
-      code: `curl -s "http://localhost:8000/api/v1/public/randomusers?page=1&limit=3" \\
+      code: `curl -s "https://praxis-api-kjrf.onrender.com/api/v1/public/randomusers?page=1&limit=3" \\
   -H "Accept: application/json"`,
     },
     {
       label: "JavaScript",
       language: "javascript",
       code: `const res = await fetch(
-  "http://localhost:8000/api/v1/public/randomusers?page=1&limit=3",
+  "https://praxis-api-kjrf.onrender.com/api/v1/public/randomusers?page=1&limit=3",
   { headers: { Accept: "application/json" } },
 );
 const body = await res.json();
@@ -44,7 +44,7 @@ console.log(body);`,
 };
 
 const res = await fetch(
-  "http://localhost:8000/api/v1/public/randomusers?page=1&limit=3",
+  "https://praxis-api-kjrf.onrender.com/api/v1/public/randomusers?page=1&limit=3",
 );
 const body = (await res.json()) as PraxisEnvelope<unknown>;
 if (!body.success) throw new Error(body.message);
@@ -56,7 +56,7 @@ console.log(body.data);`,
       code: `import urllib.request
 import json
 
-url = "http://localhost:8000/api/v1/public/randomusers?page=1&limit=3"
+url = "https://praxis-api-kjrf.onrender.com/api/v1/public/randomusers?page=1&limit=3"
 with urllib.request.urlopen(url) as res:
     body = json.load(res)
 print(body)`,
