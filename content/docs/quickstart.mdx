@@ -7,12 +7,12 @@ description: Confirm the API is up, then make your first public GET in under a m
 
 ## 1. Run the API
 
-Start `PRAXIS_API` locally (default `http://localhost:8000`). Confirm the UI can reach it via `NEXT_PUBLIC_PRAXIS_API_URL`.
+Use the live API for docs examples, or run `PRAXIS_API` locally and switch `NEXT_PUBLIC_PRAXIS_API_URL` in `.env`.
 
 ## 2. Health check
 
 ```bash
-curl -s http://localhost:8000/health
+curl -s https://praxis-api-kjrf.onrender.com/health
 ```
 
 Expect a JSON envelope with `success: true` and operational status fields.
@@ -22,7 +22,7 @@ Expect a JSON envelope with `success: true` and operational status fields.
 Public collections do not require authentication:
 
 ```bash
-curl -s "http://localhost:8000/api/v1/public/randomusers?page=1&limit=5"
+curl -s "https://praxis-api-kjrf.onrender.com/api/v1/public/randomusers?page=1&limit=5"
 ```
 
 ## 4. Try it in the browser

@@ -499,94 +499,13 @@ export function statusCodePath(code: number): string {
   return `/api/v1/kitchen-sink/status-codes/${code}`;
 }
 
-/** Same-origin path proxy for browser fetches (avoids CORS). */
-export const API_PATH_PROXY_PREFIX = "/praxis-api";
-
-function stripTrailingSlash(url: string): string {
-  return url.replace(/\/$/, "");
-}
-
-function isLoopbackHttpUrl(url: string): boolean {
-  return /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?(\/.*)?$/i.test(url);
-}
-
-function toHttpOrigin(url: string): string {
-  try {
-    return new URL(url).origin;
-  } catch {
-    return stripTrailingSlash(url);
-  }
-}
-
-function getConfiguredApiUrl(): string {
-  return process.env.NEXT_PUBLIC_PRAXIS_API_URL
-    ? stripTrailingSlash(process.env.NEXT_PUBLIC_PRAXIS_API_URL)
-    : "";
-}
-
-function withApiV1Mount(url: string): string {
-  if (/\/api\/v1$/i.test(url)) return url;
-  return `${toHttpOrigin(url)}/api/v1`;
-}
-
-export type ApiUrlResolveOptions = {
-  /** Incoming request origin (e.g. from `x-forwarded-host`) when resolving on the server. */
-  requestOrigin?: string | null;
-};
-
-/** Default Praxis API base (OpenAPI `servers.url` + Scalar Try It). */
-export const DEFAULT_API_SERVER_URL = "http://localhost:8000/api/v1";
-
-/** Host origin only — playground paths already include `/api/v1/...`. */
-export const DEFAULT_API_ORIGIN = "http://localhost:8000";
-
-/**
- * Absolute Praxis API base (`…/api/v1`) for Scalar Try It, CTA curl, OAuth start.
- *
- * Must be the real API host — never the UI `/praxis-api` path proxy.
- * Scalar sends this URL through `/scalar-proxy`, which only allows the upstream
- * API origin (`PRAXIS_API_PROXY_TARGET` / Render).
- */
-export function getApiServerUrl(_options?: ApiUrlResolveOptions): string {
-  const configured = getConfiguredApiUrl();
-  if (!configured) return DEFAULT_API_SERVER_URL;
-  return withApiV1Mount(configured);
-}
-
-/**
- * Origin prefix for URLs that already include `/api/v1/...` (playground chrome/snippets).
- */
-export function getApiDisplayOrigin(options?: ApiUrlResolveOptions): string {
-  return getApiServerUrl(options).replace(/\/api\/v1$/i, "");
-}
-
-/**
- * Browser fetch base — always same-origin path proxy (CORS-safe).
- * Paths already include `/api/v1/...`. Display/curl use {@link getApiServerUrl}.
- */
-export function getApiBaseUrl(): string {
-  return API_PATH_PROXY_PREFIX;
-}
-
-/** Scalar Try It CORS proxy (`?scalar_url=` protocol). */
-export function getScalarProxyUrl(): string {
-  return "/scalar-proxy";
-}
-
-/**
- * Upstream host for `/praxis-api/*` and `/scalar-proxy`.
- * Must be the API origin only — paths are `/api/v1/...`.
- */
-export function getApiProxyTarget(): string {
-  const explicit = process.env.PRAXIS_API_PROXY_TARGET
-    ? stripTrailingSlash(process.env.PRAXIS_API_PROXY_TARGET)
-    : "";
-  if (explicit) return toHttpOrigin(explicit);
-
-  const publicUrl = getConfiguredApiUrl();
-  if (publicUrl && /^https?:\/\//i.test(publicUrl) && !isLoopbackHttpUrl(publicUrl)) {
-    return toHttpOrigin(publicUrl);
-  }
-
-  return DEFAULT_API_ORIGIN;
-}
+export {
+  getApiBaseUrl,
+  getApiDisplayOrigin,
+  getApiProxyTarget,
+  getApiServerUrl,
+  getScalarProxyUrl,
+  PRAXIS_API_BROWSER_PROXY_PATH as API_PATH_PROXY_PREFIX,
+  type ApiUrlResolveOptions,
+  type PraxisApiConfig,
+} from "@/config/praxis-api";

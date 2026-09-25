@@ -10,7 +10,7 @@ Public datasets are open. App domains (users, ecommerce, social, chat, todos) ex
 ## Register
 
 ```bash
-curl -s -X POST http://localhost:8000/api/v1/users/register \
+curl -s -X POST https://praxis-api-kjrf.onrender.com/api/v1/users/register \
   -H "Content-Type: application/json" \
   -d '{"username":"demo","email":"demo@example.com","password":"Password1!"}'
 ```
@@ -18,7 +18,7 @@ curl -s -X POST http://localhost:8000/api/v1/users/register \
 ## Login
 
 ```bash
-curl -s -X POST http://localhost:8000/api/v1/users/login \
+curl -s -X POST https://praxis-api-kjrf.onrender.com/api/v1/users/login \
   -H "Content-Type: application/json" \
   -d '{"username":"demo","password":"Password1!"}'
 ```
@@ -30,7 +30,7 @@ Store the access token from the response (field names follow the OpenAPI schemas
 Send the bearer token on subsequent requests:
 
 ```bash
-curl -s http://localhost:8000/api/v1/ecommerce/products \
+curl -s https://praxis-api-kjrf.onrender.com/api/v1/ecommerce/products \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
