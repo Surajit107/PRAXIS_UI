@@ -291,7 +291,7 @@ export function MethodFlowVisual({ lesson, playKey }: MethodFlowVisualProps) {
                     type="button"
                     onClick={() => jumpToStep(index)}
                     aria-current={active ? "step" : undefined}
-                    className={`rounded-full border px-2.5 py-1 font-mono text-[10px] tracking-wide transition-colors duration-300 ${
+                    className={`rounded-full border px-3 py-2 font-mono text-[11px] tracking-wide transition-colors duration-300 sm:px-2.5 sm:py-1 sm:text-[10px] ${
                       active
                         ? `${soft} ${tone}`
                         : done
@@ -549,7 +549,7 @@ function ScrubButton({
       title={label}
       disabled={disabled}
       onClick={onClick}
-      className="inline-flex h-7 w-7 items-center justify-center rounded-[calc(var(--radius-sm)-2px)] text-muted transition-colors hover:bg-white/[0.06] hover:text-foreground disabled:pointer-events-none disabled:opacity-35"
+      className="inline-flex h-10 w-10 items-center justify-center rounded-[calc(var(--radius-sm)-2px)] text-muted transition-colors hover:bg-white/[0.06] hover:text-foreground disabled:pointer-events-none disabled:opacity-35 sm:h-8 sm:w-8"
     >
       {children}
     </button>
@@ -747,9 +747,11 @@ function TunnelPanel({
         </span>
       </div>
 
-      <div className="grid gap-3 p-4 sm:grid-cols-[1fr_auto_1fr_auto_1fr] sm:items-center sm:gap-2 sm:p-5">
+      <div className="flex flex-col gap-3 p-4 sm:grid sm:grid-cols-[1fr_auto_1fr_auto_1fr] sm:items-center sm:gap-2 sm:p-5">
         <TunnelEndpoint label="Client" sub="browser / app" active={open || requesting} />
-        <TunnelSegmentHorizontal open={open} flowing={!reduceMotion && open} />
+        <div className="hidden sm:block">
+          <TunnelSegmentHorizontal open={open} flowing={!reduceMotion && open} />
+        </div>
         <div
           className={`flex min-h-[4.5rem] flex-col items-center justify-center rounded-[var(--radius-sm)] border px-4 py-3 text-center ${
             open ? soft : "border-dashed border-border bg-surface-2"
@@ -760,7 +762,9 @@ function TunnelPanel({
           </span>
           <span className="mt-1 font-mono text-[10px] text-subtle">proxy hop</span>
         </div>
-        <TunnelSegmentHorizontal open={open} flowing={!reduceMotion && open} delay={0.45} />
+        <div className="hidden sm:block">
+          <TunnelSegmentHorizontal open={open} flowing={!reduceMotion && open} delay={0.45} />
+        </div>
         <TunnelEndpoint label="Target :443" sub="api.example.com" active={open} />
       </div>
 

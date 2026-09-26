@@ -28,11 +28,18 @@ export function DocsChrome({ searchRecords, children }: DocsChromeProps) {
         Skip to documentation content
       </a>
 
-      <header className="sticky top-0 z-20 border-b border-white/[0.06] bg-background/95 backdrop-blur-md">
-        <div className="mx-auto flex h-14 w-full max-w-[90rem] items-center gap-3 px-4 sm:gap-4 sm:px-6">
-          <BrandLogo markClassName="h-5 w-5" />
-          <div className="ml-auto flex min-w-0 items-center gap-2 sm:gap-3">
-            <div className="w-[min(100%,16rem)] sm:w-64">
+      <header className="sticky top-0 z-40 border-b border-white/[0.06] bg-background/95 backdrop-blur-md">
+        <div className="mx-auto flex h-14 w-full max-w-[90rem] items-center gap-2 px-3 sm:gap-3 sm:px-6">
+          <div className="min-w-0 shrink">
+            <BrandLogo markClassName="h-5 w-5" />
+          </div>
+
+          <div className="ml-auto flex min-w-0 flex-1 items-center justify-end gap-2 sm:gap-3">
+            {/*
+              Search takes remaining space on tablet+; on phones it stays usable
+              but yields to the menu control so both fit without clipping.
+            */}
+            <div className="min-w-0 flex-1 sm:max-w-xs md:max-w-sm lg:max-w-md">
               <DocsSearch records={searchRecords} variant="nav" />
             </div>
             {!hideDocsSidebar ? <DocsMobileNav pathname={pathname} /> : null}
@@ -40,7 +47,7 @@ export function DocsChrome({ searchRecords, children }: DocsChromeProps) {
         </div>
       </header>
 
-      <div className="mx-auto flex w-full max-w-[90rem]">
+      <div className="mx-auto flex w-full min-w-0 max-w-[90rem]">
         {!hideDocsSidebar ? (
           <aside className="scrollbar-overlay sticky top-14 hidden h-[calc(100vh-3.5rem)] w-64 shrink-0 overflow-y-auto lg:block">
             <div className="h-full border-r border-white/[0.06] py-8 pl-6 pr-4">
@@ -53,8 +60,8 @@ export function DocsChrome({ searchRecords, children }: DocsChromeProps) {
           id="docs-main"
           className={
             isApi
-              ? "min-w-0 flex-1 px-4 pb-6 pt-4 sm:px-6 lg:px-8"
-              : "min-w-0 flex-1 px-4 pb-16 pt-6 sm:px-6 lg:px-10 lg:pt-8"
+              ? "min-w-0 flex-1 px-3 pb-6 pt-4 sm:px-6 lg:px-8"
+              : "min-w-0 flex-1 px-3 pb-16 pt-5 sm:px-6 sm:pt-6 lg:px-10 lg:pt-8"
           }
         >
           {children}

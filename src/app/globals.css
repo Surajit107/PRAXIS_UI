@@ -91,6 +91,7 @@
 html {
   color-scheme: dark;
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 body {
@@ -102,6 +103,7 @@ body {
   letter-spacing: -0.011em;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
 }
 
 /* Display: geometric punch — weight + tracking live here so utilities don't need retuning. */
@@ -674,6 +676,22 @@ header nav a {
 .scalar.scalar-app .address-bar-bg-states button.font-code.border:hover {
   background: transparent !important;
   color: var(--scalar-color-1, #e7e7e7) !important;
+}
+
+/* Scalar Test Request — keep modal usable on phones */
+@media (max-width: 640px) {
+  .scalar.scalar-app .scalar-app-layout.scalar-client {
+    width: calc(100vw - 1rem) !important;
+    max-width: calc(100vw - 1rem) !important;
+    max-height: calc(100dvh - 1rem) !important;
+    margin: 0.5rem !important;
+    border-radius: 12px !important;
+  }
+
+  .scalar.scalar-app .address-bar-bg-states {
+    flex-wrap: wrap !important;
+    gap: 0.35rem !important;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

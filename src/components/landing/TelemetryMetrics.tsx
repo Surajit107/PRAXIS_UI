@@ -34,7 +34,7 @@ function MetricCell({ stat, index }: { stat: PraxisStat; index: number }) {
 
       <div className="mt-3 flex items-baseline gap-2.5">
         <m.span
-          className={`font-display text-4xl font-semibold tracking-[-0.045em] tabular-nums sm:text-5xl ${
+          className={`font-display text-3xl font-semibold tracking-[-0.045em] tabular-nums sm:text-4xl md:text-5xl ${
             isZero ? "text-success" : "text-foreground"
           }`}
           initial={false}
@@ -114,7 +114,7 @@ export function TelemetryMetrics() {
         <span className="tabular-nums text-subtle/80">4 signals</span>
       </m.div>
 
-      <Stagger as="div" columns={4} stagger={0.12} className="grid grid-cols-2 gap-x-8 gap-y-10 md:grid-cols-4">
+      <Stagger as="div" columns={4} stagger={0.12} className="grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-x-8 sm:gap-y-10 md:grid-cols-4">
         {stats.map((stat, index) => (
           <MetricCell key={stat.id} stat={stat} index={index} />
         ))}

@@ -71,7 +71,7 @@ export const mdxComponents: MDXComponents = {
   ),
   h1: ({ children, ...rest }) => (
     <h1
-      className="font-display text-3xl font-semibold tracking-[-0.03em] text-foreground"
+      className="font-display text-2xl font-semibold tracking-[-0.03em] text-foreground sm:text-3xl"
       {...rest}
     >
       {children}
@@ -79,7 +79,7 @@ export const mdxComponents: MDXComponents = {
   ),
   h2: ({ children, ...rest }) => (
     <h2
-      className="mt-10 scroll-mt-24 border-b border-hairline pb-2 font-display text-xl font-semibold text-foreground"
+      className="mt-10 scroll-mt-24 border-b border-hairline pb-2 font-display text-lg font-semibold text-foreground sm:text-xl"
       {...rest}
     >
       {children}
@@ -87,7 +87,7 @@ export const mdxComponents: MDXComponents = {
   ),
   h3: ({ children, ...rest }) => (
     <h3
-      className="mt-8 scroll-mt-24 font-display text-lg font-semibold text-foreground"
+      className="mt-8 scroll-mt-24 font-display text-base font-semibold text-foreground sm:text-lg"
       {...rest}
     >
       {children}

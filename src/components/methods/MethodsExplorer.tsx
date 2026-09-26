@@ -67,7 +67,7 @@ export function MethodsExplorer() {
                   role="tab"
                   aria-selected={selected}
                   onClick={() => selectMethod(method)}
-                  className={`relative shrink-0 rounded-[var(--radius-sm)] px-3 py-2 font-mono text-[13px] font-semibold tracking-wide transition-colors ${
+                  className={`relative shrink-0 rounded-[var(--radius-sm)] px-3 py-2.5 font-mono text-[13px] font-semibold tracking-wide transition-colors min-h-10 ${
                     selected
                       ? `${methodToneClass[method]} ${methodSoftClass[method]}`
                       : "text-muted hover:bg-white/[0.04] hover:text-foreground"
@@ -88,7 +88,7 @@ export function MethodsExplorer() {
             })}
           </div>
 
-          <div className="grid gap-8 p-5 sm:p-8 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.2fr)] lg:gap-10">
+          <div className="grid gap-6 p-4 sm:gap-8 sm:p-8 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.2fr)] lg:gap-10">
             <AnimatePresence mode="wait">
               <m.div
                 key={`${lesson.method}-${lesson.activeVariantId ?? "default"}`}
@@ -139,7 +139,7 @@ export function MethodsExplorer() {
                   </div>
                 ) : null}
 
-                <dl className="grid grid-cols-3 gap-2">
+                <dl className="grid grid-cols-3 gap-1.5 sm:gap-2">
                   {PROPERTY_ORDER.map((key) => {
                     const meta = methodPropertyLabels[key];
                     const on = lesson.properties[key];
@@ -147,11 +147,11 @@ export function MethodsExplorer() {
                       <div
                         key={key}
                         title={meta.hint}
-                        className={`rounded-[var(--radius-sm)] border px-3 py-2.5 ${
+                        className={`rounded-[var(--radius-sm)] border px-2 py-2.5 sm:px-3 ${
                           on ? methodSoftClass[lesson.method] : "border-border bg-surface-2"
                         }`}
                       >
-                        <dt className="font-mono text-[10px] uppercase tracking-[0.14em] text-subtle">
+                        <dt className="font-mono text-[9px] uppercase tracking-[0.12em] text-subtle sm:text-[10px] sm:tracking-[0.14em]">
                           {meta.label}
                         </dt>
                         <dd
@@ -243,7 +243,47 @@ export function MethodsExplorer() {
           </p>
         </div>
 
-        <div className="overflow-x-auto rounded-[var(--radius-lg)] border border-border">
+        {/* Mobile: card list — table requires sideways scroll on phones */}
+        <ul className="flex flex-col gap-2 md:hidden">
+          {httpMethodLessons.map((row) => (
+            <li key={row.method}>
+              <button
+                type="button"
+                onClick={() => selectMethod(row.method)}
+                className={`w-full rounded-[var(--radius-md)] border p-4 text-left transition-colors ${
+                  row.method === active
+                    ? "border-border-strong bg-white/[0.04]"
+                    : "border-border bg-surface hover:bg-white/[0.02]"
+                }`}
+              >
+                <div className="flex items-center justify-between gap-3">
+                  <span className={`font-mono text-sm font-semibold ${methodToneClass[row.method]}`}>
+                    {row.method}
+                  </span>
+                  <span className="text-xs text-muted">{row.tagline}</span>
+                </div>
+                <dl className="mt-3 grid grid-cols-3 gap-2">
+                  {PROPERTY_ORDER.map((key) => (
+                    <div key={key}>
+                      <dt className="font-mono text-[10px] uppercase tracking-[0.12em] text-subtle">
+                        {methodPropertyLabels[key].label}
+                      </dt>
+                      <dd
+                        className={`mt-0.5 font-mono text-xs ${
+                          row.properties[key] ? "text-success" : "text-subtle"
+                        }`}
+                      >
+                        {row.properties[key] ? "yes" : "—"}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              </button>
+            </li>
+          ))}
+        </ul>
+
+        <div className="hidden overflow-x-auto rounded-[var(--radius-lg)] border border-border md:block">
           <table className="w-full min-w-[640px] border-collapse text-left text-sm">
             <thead>
               <tr className="border-b border-border bg-surface-2">

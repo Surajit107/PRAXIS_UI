@@ -27,9 +27,9 @@ export function HeroSection() {
             <span className="text-accent/80">.app</span>
           </p>
 
-          <h1
+            <h1
             style={riseDelay(0.06)}
-            className="animate-rise mt-4 font-display text-[42px] font-semibold leading-[1.02] tracking-[-0.048em] text-balance sm:text-6xl lg:text-[72px]"
+            className="animate-rise mt-4 font-display text-[clamp(2.125rem,8vw,4.5rem)] font-semibold leading-[1.02] tracking-[-0.048em] text-balance sm:text-6xl lg:text-[72px]"
           >
             <span className="text-gradient">Practice on APIs</span>
             <span className="mt-1 block text-white/38">that behave like production.</span>
@@ -40,11 +40,11 @@ export function HeroSection() {
             real responses, no keys.
           </p>
 
-          <div style={riseDelay(0.18)} className="animate-rise relative z-10 mt-10 flex flex-wrap gap-3">
-            <Button href="/playground" size="lg" icon={Terminal} trailingArrow>
+          <div style={riseDelay(0.18)} className="animate-rise relative z-10 mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <Button href="/playground" size="lg" icon={Terminal} trailingArrow className="w-full sm:w-auto">
               Start building
             </Button>
-            <Button href="/docs" variant="secondary" size="lg" icon={BookOpen} newTab>
+            <Button href="/docs" variant="secondary" size="lg" icon={BookOpen} newTab className="w-full sm:w-auto">
               Read the docs
             </Button>
           </div>

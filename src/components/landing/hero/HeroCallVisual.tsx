@@ -291,7 +291,7 @@ export function HeroCallVisual() {
       <div className="glass relative rounded-[20px] shadow-[0_28px_80px_-36px_rgba(0,0,0,0.85)]">
       <div className="relative overflow-hidden rounded-[20px]">
         {/* Stage */}
-        <div className="relative aspect-[5/4] w-full sm:aspect-[16/11]">
+        <div className="relative aspect-[4/5] w-full min-[400px]:aspect-[5/4] sm:aspect-[16/11]">
           <m.svg
             viewBox="0 0 100 100"
             preserveAspectRatio="xMidYMid meet"
@@ -455,7 +455,7 @@ export function HeroCallVisual() {
           </m.div>
 
           {/* Domain controls */}
-          <div className="absolute bottom-3 left-3 right-3 flex flex-wrap items-center gap-2 sm:bottom-4 sm:left-4 sm:right-4">
+          <div className="absolute bottom-3 left-3 right-3 flex flex-col gap-2 sm:bottom-4 sm:left-4 sm:right-4 sm:flex-row sm:flex-wrap sm:items-center">
             <div className="flex flex-wrap gap-1.5" role="tablist" aria-label="Practice domain">
               {callScenes.map((item, index) => {
                 const selected = index === activeIndex;
@@ -466,7 +466,7 @@ export function HeroCallVisual() {
                     role="tab"
                     aria-selected={selected}
                     onClick={() => runCall(index)}
-                    className={`rounded-full border px-2.5 py-1 font-mono text-[10px] transition-[background-color,border-color,color,transform] duration-300 ease-[cubic-bezier(0.45,0.05,0.25,1)] sm:text-[11px] ${
+                    className={`min-h-9 rounded-full border px-3 py-1.5 font-mono text-[11px] transition-[background-color,border-color,color,transform] duration-300 ease-[cubic-bezier(0.45,0.05,0.25,1)] sm:min-h-0 sm:px-2.5 sm:py-1 sm:text-[11px] ${
                       selected
                         ? "border-accent-border bg-accent-soft text-accent"
                         : "border-border bg-surface-2/80 text-muted hover:border-border-strong hover:text-foreground"
@@ -480,7 +480,7 @@ export function HeroCallVisual() {
             <button
               type="button"
               onClick={() => runCall(activeIndex)}
-              className="ml-auto rounded-full border border-border-strong bg-foreground px-3 py-1.5 text-[11px] font-semibold text-background transition-[transform,box-shadow] duration-200 ease-out hover:-translate-y-px hover:shadow-[0_10px_24px_-12px_color-mix(in_srgb,var(--accent)_45%,transparent)] active:translate-y-0 sm:text-xs"
+              className="min-h-10 w-full rounded-full border border-border-strong bg-foreground px-4 py-2 text-xs font-semibold text-background transition-[transform,box-shadow] duration-200 ease-out hover:-translate-y-px hover:shadow-[0_10px_24px_-12px_color-mix(in_srgb,var(--accent)_45%,transparent)] active:translate-y-0 sm:ml-auto sm:min-h-0 sm:w-auto sm:px-3 sm:py-1.5 sm:text-xs"
             >
               {phase === "handoff" || phase === "sending" || phase === "resolving" ? "Calling…" : "Send request"}
             </button>

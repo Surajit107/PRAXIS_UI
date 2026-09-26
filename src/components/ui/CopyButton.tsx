@@ -39,7 +39,7 @@ export function CopyButton({ value, label = "Copy", className = "" }: CopyButton
       type="button"
       onClick={handleCopy}
       aria-label={copied ? "Copied" : label}
-      className={`relative inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-[var(--radius-sm)] text-muted transition-colors hover:bg-white/[0.06] hover:text-foreground ${className}`}
+      className={`relative inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-[var(--radius-sm)] text-muted transition-colors hover:bg-white/[0.06] hover:text-foreground sm:h-8 sm:w-8 ${className}`}
     >
       <AnimatePresence mode="popLayout" initial={false}>
         <m.span

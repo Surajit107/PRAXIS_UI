@@ -164,6 +164,15 @@ export function SiteNav() {
   }, [open]);
 
   useEffect(() => {
+    if (!open) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previous;
+    };
+  }, [open]);
+
+  useEffect(() => {
     setOpen(false);
   }, [pathname]);
 
@@ -180,7 +189,7 @@ export function SiteNav() {
 
         <div className="relative overflow-hidden rounded-[20px]">
           <div className="flex h-12 items-center gap-2 px-2.5 sm:h-[52px] sm:gap-3 sm:px-3">
-            <div className="shrink-0 pl-1.5 sm:pl-2">
+            <div className="min-w-0 shrink-0 pl-1.5 sm:pl-2">
               <BrandLogo />
             </div>
 
@@ -235,7 +244,7 @@ export function SiteNav() {
                 aria-expanded={open}
                 aria-controls="mobile-nav"
                 onClick={() => setOpen((value) => !value)}
-                className="inline-flex h-9 w-9 items-center justify-center rounded-full text-muted transition-colors hover:bg-white/[0.06] hover:text-foreground lg:hidden"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full text-muted transition-colors hover:bg-white/[0.06] hover:text-foreground lg:hidden"
               >
                 {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
               </button>
@@ -253,7 +262,7 @@ export function SiteNav() {
                 transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
                 className="overflow-hidden border-t border-white/[0.06] lg:hidden"
               >
-                <ul className="flex flex-col gap-0.5 px-2.5 py-2.5">
+                <ul className="flex max-h-[min(70vh,28rem)] flex-col gap-0.5 overflow-y-auto px-2.5 py-2.5">
                   {links.map((link, index) => {
                     const active = isActive(pathname, link.href, activeSection);
                     return (
@@ -276,7 +285,7 @@ export function SiteNav() {
                             {...("newTab" in link && link.newTab
                               ? { target: "_blank", rel: "noreferrer" }
                               : {})}
-                            className="flex items-center gap-3 rounded-[12px] px-3 py-2.5 text-[15px] text-muted transition-colors hover:bg-white/[0.04] hover:text-foreground aria-[current=page]:bg-white/[0.06] aria-[current=page]:text-foreground"
+                            className="flex min-h-11 items-center gap-3 rounded-[12px] px-3 py-2.5 text-[15px] text-muted transition-colors hover:bg-white/[0.04] hover:text-foreground aria-[current=page]:bg-white/[0.06] aria-[current=page]:text-foreground"
                           >
                             <NavIcon icon={link.icon} active={active} size="md" />
                             <span>{link.label}</span>
