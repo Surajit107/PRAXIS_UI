@@ -72,7 +72,7 @@ export function HeroDomainRail() {
                           ? `${item.name} dataset`
                           : `${item.name}, ${item.endpoints} endpoints`
                       }
-                      className={`relative rounded-[var(--radius-sm)] px-2.5 py-1.5 text-sm tracking-tight transition-colors duration-300 ${
+                      className={`relative min-h-10 rounded-[var(--radius-sm)] px-2.5 py-2 text-sm tracking-tight transition-colors duration-300 sm:min-h-0 sm:py-1.5 ${
                         selected ? "text-foreground" : "text-subtle hover:text-muted"
                       }`}
                     >

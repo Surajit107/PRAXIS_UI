@@ -229,7 +229,7 @@ export function UserProfileClient() {
 
   return (
     <AuthStandaloneShell eyebrow="Account" title="Signed in" wide>
-      <div className="flex items-start gap-4 text-left">
+      <div className="flex flex-col gap-4 text-left sm:flex-row sm:items-start">
         {avatarUrl ? (
           // eslint-disable-next-line @next/next/no-img-element -- remote avatar URLs vary by provider
           <img
@@ -257,6 +257,7 @@ export function UserProfileClient() {
           loading={logoutPending}
           icon={LogOut}
           onClick={() => void onLogout()}
+          className="w-full sm:w-auto"
         >
           Sign out
         </Button>

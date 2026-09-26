@@ -37,8 +37,8 @@ export function SiteFooter() {
 
   return (
     <footer className="border-t border-hairline">
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-[1.4fr_repeat(3,1fr)]">
-        <div>
+      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:grid-cols-2 sm:px-6 md:grid-cols-[1.4fr_repeat(3,1fr)]">
+        <div className="sm:col-span-2 md:col-span-1">
           <BrandLogo markClassName="h-5 w-5" />
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted">
             {siteConfig.description}

@@ -173,32 +173,38 @@ export function PlaygroundClient({ initialDomain, initialCode }: PlaygroundProps
   }
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
-      <div role="tablist" aria-label="API domain" className="mb-6 inline-flex rounded-[var(--radius-md)] border border-border bg-surface p-1">
-        {domains.map((item) => {
-          const active = domain === item.id;
-          return (
-            <button
-              key={item.id}
-              type="button"
-              role="tab"
-              aria-selected={active}
-              onClick={() => selectDomain(item.id)}
-              className={`relative rounded-[var(--radius-sm)] px-4 py-1.5 text-sm font-medium transition-colors ${
-                active ? "text-foreground" : "text-muted hover:text-foreground"
-              }`}
-            >
-              {active ? (
-                <m.span
-                  layoutId="domain-pill"
-                  className="absolute inset-0 rounded-[var(--radius-sm)] border border-border-strong bg-surface-3"
-                  transition={{ type: "spring", stiffness: 500, damping: 38 }}
-                />
-              ) : null}
-              <span className="relative">{item.title}</span>
-            </button>
-          );
-        })}
+    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-10">
+      <div className="mb-6 min-w-0 overflow-x-auto scrollbar-thin">
+        <div
+          role="tablist"
+          aria-label="API domain"
+          className="inline-flex min-w-full gap-0 rounded-[var(--radius-md)] border border-border bg-surface p-1 sm:min-w-0"
+        >
+          {domains.map((item) => {
+            const active = domain === item.id;
+            return (
+              <button
+                key={item.id}
+                type="button"
+                role="tab"
+                aria-selected={active}
+                onClick={() => selectDomain(item.id)}
+                className={`relative min-h-10 shrink-0 rounded-[var(--radius-sm)] px-3 py-2 text-sm font-medium transition-colors sm:px-4 sm:py-1.5 ${
+                  active ? "text-foreground" : "text-muted hover:text-foreground"
+                }`}
+              >
+                {active ? (
+                  <m.span
+                    layoutId="domain-pill"
+                    className="absolute inset-0 rounded-[var(--radius-sm)] border border-border-strong bg-surface-3"
+                    transition={{ type: "spring", stiffness: 500, damping: 38 }}
+                  />
+                ) : null}
+                <span className="relative whitespace-nowrap">{item.title}</span>
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       <form onSubmit={runRequest} className="panel mb-6 flex flex-col gap-2 p-2 sm:flex-row sm:items-center">
@@ -207,10 +213,10 @@ export function PlaygroundClient({ initialDomain, initialCode }: PlaygroundProps
           value={request.method}
           options={methodOptions}
           onChange={(method) => setRequest((current) => ({ ...current, method }))}
-          className="sm:w-[136px]"
+          className="w-full sm:w-[136px]"
           triggerClassName="border-transparent bg-surface-3"
         />
-        <label className="flex h-10 min-w-0 flex-1 items-center rounded-[var(--radius-sm)] border border-border bg-background px-3 font-mono text-[13px] transition-colors focus-within:border-accent-border">
+        <label className="flex h-11 min-w-0 flex-1 items-center rounded-[var(--radius-sm)] border border-border bg-background px-3 font-mono text-[13px] transition-colors focus-within:border-accent-border sm:h-10">
           <span className="sr-only">Request path</span>
           <span className="hidden shrink-0 text-subtle lg:inline">{displayBaseUrl}</span>
           <input
@@ -222,14 +228,14 @@ export function PlaygroundClient({ initialDomain, initialCode }: PlaygroundProps
             placeholder="/api/v1/…"
           />
         </label>
-        <Button type="submit" loading={pending} className="sm:w-auto">
+        <Button type="submit" loading={pending} className="w-full sm:w-auto">
           {!pending ? <Send aria-hidden className="h-4 w-4" /> : null}
           {pending ? "Sending" : "Send"}
         </Button>
       </form>
 
       <div className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
-        <aside className="panel flex max-h-[min(70vh,560px)] flex-col overflow-hidden p-2 lg:max-h-[calc(100vh-12rem)]">
+        <aside className="panel flex max-h-[min(42vh,320px)] flex-col overflow-hidden p-2 sm:max-h-[min(50vh,420px)] lg:max-h-[calc(100vh-12rem)]">
           <p className="shrink-0 px-3 pb-2 pt-2 text-xs font-medium uppercase tracking-[0.14em] text-subtle">Presets</p>
           <AnimatePresence mode="wait" initial={false}>
             <m.ul
@@ -265,10 +271,10 @@ export function PlaygroundClient({ initialDomain, initialCode }: PlaygroundProps
 
         <div className="min-w-0 space-y-6">
           <section aria-label="Response" className="panel min-w-0 overflow-hidden">
-            <div className="flex items-center justify-between gap-3 border-b border-border px-4 py-3">
+            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border px-4 py-3">
               <p className="text-sm font-medium">Response</p>
               {result.kind === "success" ? (
-                <span className="flex items-center gap-3 font-mono text-xs">
+                <span className="flex flex-wrap items-center gap-3 font-mono text-xs">
                   <span className="flex items-center gap-1 text-subtle">
                     <Clock aria-hidden className="h-3.5 w-3.5" />
                     {result.durationMs} ms

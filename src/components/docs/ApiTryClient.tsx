@@ -151,7 +151,7 @@ export function ApiTryClient({ initialMethod, initialPath }: ApiTryClientProps) 
         />
         <label className="flex h-10 min-w-0 flex-1 items-center rounded-[var(--radius-sm)] border border-border bg-background px-3 font-mono text-[13px] transition-colors focus-within:border-border-strong">
           <span className="sr-only">Request path</span>
-          <span className="hidden shrink-0 text-subtle sm:inline">{displayBase}</span>
+          <span className="hidden shrink-0 text-subtle lg:inline">{displayBase}</span>
           <input
             value={path}
             onChange={(event) => setPath(event.target.value)}
@@ -161,7 +161,7 @@ export function ApiTryClient({ initialMethod, initialPath }: ApiTryClientProps) 
             placeholder="/healthcheck"
           />
         </label>
-        <Button type="submit" loading={pending} className="sm:w-auto">
+        <Button type="submit" loading={pending} className="w-full sm:w-auto">
           {!pending ? <Send aria-hidden className="h-4 w-4" /> : null}
           Send
         </Button>

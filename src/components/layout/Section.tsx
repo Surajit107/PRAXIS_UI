@@ -40,9 +40,9 @@ function MixedSectionTitle({ title }: { title: ReactNode }) {
  */
 export function Section({ id, label, title, description, children, className = "" }: SectionProps) {
   return (
-    <section id={id} className={`relative scroll-mt-20 py-20 sm:py-28 ${className}`}>
+    <section id={id} className={`relative scroll-mt-[calc(var(--nav-float-offset)+0.75rem)] py-16 sm:scroll-mt-20 sm:py-28 ${className}`}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <header className="mb-12 max-w-2xl sm:mb-14">
+        <header className="mb-10 max-w-2xl sm:mb-14">
           {label ? (
             <Reveal tone="badge" className="mb-5 flex items-center gap-3">
               <span
@@ -57,7 +57,7 @@ export function Section({ id, label, title, description, children, className = "
             </Reveal>
           ) : null}
           <Reveal tone="title">
-            <h2 className="font-display text-3xl font-semibold tracking-[-0.035em] text-balance sm:text-[40px] sm:leading-[1.08]">
+            <h2 className="font-display text-[clamp(1.75rem,6.5vw,2.5rem)] font-semibold tracking-[-0.035em] text-balance sm:text-[40px] sm:leading-[1.08]">
               <MixedSectionTitle title={title} />
             </h2>
           </Reveal>

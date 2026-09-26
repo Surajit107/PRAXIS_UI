@@ -98,7 +98,7 @@ export function DocsSearch({ records, variant = "default" }: DocsSearchProps) {
       <div
         className={`flex items-center gap-2 border bg-surface focus-within:border-border-strong ${
           isNav
-            ? "rounded-full border-white/[0.1] px-3 py-1.5"
+            ? "min-h-10 rounded-full border-white/[0.1] px-2.5 py-1.5 sm:px-3"
             : "rounded-[var(--radius-sm)] border-border px-3 py-2"
         }`}
       >
@@ -110,7 +110,7 @@ export function DocsSearch({ records, variant = "default" }: DocsSearchProps) {
           value={query}
           autoComplete="off"
           spellCheck={false}
-          placeholder="Search docs…"
+          placeholder={isNav ? "Search…" : "Search docs…"}
           aria-autocomplete="list"
           aria-controls={listId}
           aria-expanded={open && results.length > 0}
@@ -131,19 +131,19 @@ export function DocsSearch({ records, variant = "default" }: DocsSearchProps) {
               go(results[active]!.href);
             }
           }}
-          className="docs-search-input w-full appearance-none border-0 bg-transparent text-sm text-foreground shadow-none outline-none ring-0 placeholder:text-subtle focus:border-0 focus:outline-none focus:ring-0"
+          className="docs-search-input min-w-0 w-full appearance-none border-0 bg-transparent text-sm text-foreground shadow-none outline-none ring-0 placeholder:text-subtle focus:border-0 focus:outline-none focus:ring-0"
         />
         {query ? (
           <button
             type="button"
             aria-label="Clear search"
             onClick={() => setQuery("")}
-            className="rounded p-0.5 text-subtle hover:text-foreground"
+            className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-subtle hover:text-foreground"
           >
             <X className="h-3.5 w-3.5" />
           </button>
         ) : (
-          <kbd className="hidden shrink-0 rounded border border-border px-1.5 py-0.5 font-mono text-[10px] text-subtle sm:inline">
+          <kbd className="hidden shrink-0 rounded border border-border px-1.5 py-0.5 font-mono text-[10px] text-subtle md:inline">
             ⌘K
           </kbd>
         )}
@@ -152,8 +152,10 @@ export function DocsSearch({ records, variant = "default" }: DocsSearchProps) {
         <ul
           id={listId}
           role="listbox"
-          className={`scrollbar-thin absolute z-40 mt-2 max-h-80 w-full overflow-auto rounded-[var(--radius-md)] border border-border bg-surface-2 p-1 shadow-lg ${
-            isNav ? "right-0 min-w-[18rem]" : ""
+          className={`scrollbar-thin absolute z-40 mt-2 max-h-[min(20rem,70vh)] w-full overflow-auto rounded-[var(--radius-md)] border border-border bg-surface-2 p-1 shadow-lg ${
+            isNav
+              ? "right-0 max-w-[calc(100vw-1.5rem)] sm:max-w-none sm:min-w-[18rem]"
+              : ""
           }`}
         >
           {results.length === 0 ? (

@@ -27,7 +27,7 @@ export function PageHeader({ eyebrow, title, description, actions }: PageHeaderP
           {description ? <div className="mt-3 max-w-xl text-[15px] text-muted">{description}</div> : null}
         </div>
         {actions ? (
-          <div style={ACTIONS_DELAY} className="animate-rise flex shrink-0 gap-2">
+          <div style={ACTIONS_DELAY} className="animate-rise flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:flex-wrap sm:[&_a]:w-auto sm:[&_button]:w-auto [&_a]:w-full [&_button]:w-full">
             {actions}
           </div>
         ) : null}

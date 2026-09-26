@@ -13,16 +13,23 @@ const SPEC_URL =
 
 /** Force OpenAPI `servers.url` to the configured Praxis base (`…/api/v1`). */
 function withApiServerUrl(yaml: string, serverUrl: string): string {
-  const serversBlock = /^servers:\s*\n(?:\s+-\s+url:\s*.+\n(?:\s+description:\s*.+\n)?)+/m;
+  // Normalize CRLF — the previous `\n`-only regex missed Windows line endings,
+  // failed to replace, then prepended a second `servers:` key (YAMLParseError).
+  const normalized = yaml.replace(/\r\n/g, "\n");
   const nextServers = `servers:\n  - url: ${serverUrl}\n    description: Praxis API\n`;
 
-  if (serversBlock.test(yaml)) {
-    return yaml.replace(
-      serversBlock,
-      nextServers,
-    );
+  // Top-level `servers:` plus every indented continuation line under it.
+  const serversBlock = /^servers:\n(?:[ \t]+.*\n)*/m;
+
+  if (serversBlock.test(normalized)) {
+    return normalized.replace(serversBlock, nextServers);
   }
-  return `${nextServers}${yaml}`;
+
+  if (/^paths:/m.test(normalized)) {
+    return normalized.replace(/^paths:/m, `${nextServers}paths:`);
+  }
+
+  return `${nextServers}${normalized}`;
 }
 
 export function ScalarReference() {
